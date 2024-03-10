@@ -37,7 +37,7 @@ const Navbar = () => {
                 <a
                   className="nav-link"
                   href="/concern"
-                  style={{ color: "yellow" }}
+                  style={{ color: "#ffc107" }}
                 >
                   Raise a Concern
                 </a>
