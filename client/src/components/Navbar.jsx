@@ -41,6 +41,13 @@ const Navbar = () => {
                 >
                   Raise a Concern
                 </a>
+                <a
+                  className="nav-link"
+                  href="/register"
+                  style={{ color: "white" }}
+                >
+                  Register
+                </a>
               </div>
             </div>
           </div>
