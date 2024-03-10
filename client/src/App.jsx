@@ -7,6 +7,8 @@ import Navbar from "./components/Navbar";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
 import Concern from "./pages/Concern";
+import Login from "./pages/Login";
+import RegistrationForm from "./pages/Register";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/about" element={<About />} />
           <Route path="/concern" element={<Concern />} />
+          <Route path="/register" element={<RegistrationForm />} />
         </Routes>
       </BrowserRouter>
     </>
