@@ -1,5 +1,4 @@
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
@@ -51,13 +50,15 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        <button
-          type="button"
-          className="btn btn-outline-warning btn-lg"
-          style={{ width: "32rem" }}
-        >
-          Raise a Concern
-        </button>
+        <a href="/concern" style={{ textDecoration: "none" }}>
+          <button
+            type="button"
+            className="btn btn-outline-warning btn-lg"
+            style={{ width: "32rem" }}
+          >
+            Raise a Concern
+          </button>
+        </a>
       </div>
 
       <div className="card">
