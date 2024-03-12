@@ -84,7 +84,7 @@ const Concern = () => {
           value={formData.department}
           onChange={handleChange}
           required
-          style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#ffc107", fontSize: "18px" }} />
+          style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px",color: "#333333", fontSize: "18px" }} />
         <br />
 
         <input type="submit" value="Submit" style={{ height: "40px", width: "245px", borderRadius: "10px", border: "none", backgroundColor: "#ffc107", marginBottom: "20px" }} />

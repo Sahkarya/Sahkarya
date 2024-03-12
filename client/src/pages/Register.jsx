@@ -30,7 +30,7 @@ const RegistrationForm = () => {
           value={formData.name}
           onChange={handleChange}
           required
-          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "20px", color: "#333333", fontSize: "18px"}}/>
+          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px"}}/>
       
       
         <label htmlFor="email" style = {{marginTop:"30px",fontSize: "17px"}}>Email:</label>
@@ -42,7 +42,7 @@ const RegistrationForm = () => {
           value={formData.email}
           onChange={handleChange}
           required
-          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "20px", color: "#333333", fontSize: "18px"}} />
+          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px"}} />
       
     
         <label htmlFor="password" style = {{marginTop:"30px",fontSize: "17px"}}>Password:</label>
@@ -54,9 +54,9 @@ const RegistrationForm = () => {
           value={formData.password}
           onChange={handleChange}
           required
-          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "20px", color: "#333333", fontSize: "18px"}}/>
+          style = {{marginTop:"10px",paddingLeft: "5px",boxSizing: "border-box", height: "40px", width: "430px",border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px"}}/>
       
-      <button type="submit" style = {{height: "40px", width:"245px",marginTop:"30px",marginLeft:"25%",marginRight:"50%" , borderRadius: "20px",border:"none", backgroundColor:"#ffc107", paddingTop: "5px"}}>Sign Up</button>
+      <button type="submit" style = {{height: "40px", width:"245px",marginTop:"30px",marginLeft:"20%",marginRight:"50%" , borderRadius: "10px",border:"none", backgroundColor:"#ffc107", paddingTop: "5px"}}>Sign Up</button>
     </form>
   );
 };
