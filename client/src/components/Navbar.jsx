@@ -5,6 +5,8 @@ const Navbar = () => {
     backgroundColor: "#002447",
     color: "yellow",
   };
+ 
+ 
   return (
     <>
       <div>
@@ -23,14 +25,15 @@ const Navbar = () => {
                 <a
                   className="nav-link"
                   href="/explore"
-                  style={{ color: "white" }}
+                  style={{color:"white"}}
+                  
                 >
                   Explore
                 </a>
                 <a
                   className="nav-link"
                   href="/about"
-                  style={{ color: "white" }}
+                  style={{ color: "white",  }}
                 >
                   About Us
                 </a>
@@ -48,6 +51,13 @@ const Navbar = () => {
                 >
                   Register
                 </a>
+                <a
+                  className="nav-link"
+                  href="/login"
+                  style={{ color: "white" }}
+                >
+                  Login
+                </a>
               </div>
             </div>
           </div>
@@ -56,5 +66,6 @@ const Navbar = () => {
     </>
   );
 };
+
 
 export default Navbar;
