@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./utilities/db");
 const concernRoute = require("./routers/concern-router");
+const authRoute = require("./routers/auth-router");
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/form", concernRoute);
+app.use("/api/auth", authRoute);
 
 const PORT = 5000;
 connectDB().then(() => {
