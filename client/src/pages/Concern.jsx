@@ -22,8 +22,9 @@ const Concern = () => {
 
   return (
     <>
+    <div><h2 style={{ color: "rgb(0, 36, 71)", width: "100%", display: "grid", marginTop: "40px", alignItems: "center", justifyContent: "center", fontWeight: "600" }}>Raise a Concern</h2>
       <form onSubmit={handleSubmit} method="POST" style={{ display: "grid", justifyContent: "center", paddingLeft: "20px" }}>
-        <label htmlFor="name" style={{ fontSize: "17px" }}>Name:</label>
+        <label htmlFor="name" style={{marginTop: "30px", fontSize: "17px",fontWeight:"500" }}>Name:</label>
         <br />
         <input
           type="text"
@@ -36,7 +37,7 @@ const Concern = () => {
           style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
         <br />
 
-        <label htmlFor="phone" style={{ fontSize: "17px" }}>Phone:</label>
+        <label htmlFor="phone" style={{ fontSize: "17px",fontWeight:"500" }}>Phone:</label>
         <br />
         <input
           type="tel"
@@ -49,7 +50,7 @@ const Concern = () => {
           style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
         <br />
 
-        <label htmlFor="message" style={{ fontSize: "17px" }}>Message:</label>
+        <label htmlFor="message" style={{ fontSize: "17px",fontWeight:"500" }}>Message:</label>
         <br />
         <textarea
           id="message"
@@ -61,7 +62,7 @@ const Concern = () => {
           style={{ paddingLeft: "5px", boxSizing: "border-box", height: "100px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }}></textarea>
         <br />
 
-        <label htmlFor="address" style={{ fontSize: "17px" }}>Address:</label>
+        <label htmlFor="address" style={{ fontSize: "17px",fontWeight:"500" }}>Address:</label>
         <br />
         <input
           type="text"
@@ -74,7 +75,7 @@ const Concern = () => {
           style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
         <br />
 
-        <label htmlFor="department" style={{ fontSize: "17px" }}>Department:</label>
+        <label htmlFor="department" style={{ fontSize: "17px",fontWeight:"500" }}>Department:</label>
         <br />
         <input
           type="text"
@@ -87,8 +88,9 @@ const Concern = () => {
           style={{ paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px",color: "#333333", fontSize: "18px" }} />
         <br />
 
-        <input type="submit" value="Submit" style={{ height: "40px", width: "245px", borderRadius: "10px", border: "none", backgroundColor: "#ffc107", marginBottom: "20px" }} />
+        <input type="submit" value="Submit" style={{ fontWeight:"500",height: "40px", width: "245px", borderRadius: "10px", border: "none", backgroundColor: "#ffc107", marginBottom: "20px" }} />
       </form>
+      </div>
     </>
   );
 };
