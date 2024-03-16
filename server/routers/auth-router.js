@@ -8,4 +8,6 @@ router
   .route("/register")
   .post(validate(registrationSchema), authController.register);
 
+router.route("/login").post(authController.login);
+
 module.exports = router;
