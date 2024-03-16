@@ -3,6 +3,8 @@ import React, { useState } from "react";
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
+    identity:"",
+    phone:"",
     email: "",
     password: "",
   });
@@ -27,8 +29,30 @@ const RegistrationForm = () => {
           type="text"
           id="name"
           name="name"
-          placeholder="Your name.."
+          placeholder="Your name."
           value={formData.name}
+          onChange={handleChange}
+          required
+          style={{ marginTop: "10px", paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
+        <label htmlFor="name" style={{ marginTop: "30px", fontSize: "17px",fontWeight:"500" }}>Identity:</label>
+        <input
+          type="integer"
+          id="identity"
+          name="identity"
+          placeholder="Enter your Id number."
+
+          value={formData.identity}
+          onChange={handleChange}
+          required
+          style={{ marginTop: "10px", paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
+        <label htmlFor="phone" style={{ marginTop: "30px", fontSize: "17px",fontWeight:"500" }}>Phone:</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          placeholder="Your mobile number."
+          value={formData.phone}
           onChange={handleChange}
           required
           style={{ marginTop: "10px", paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
@@ -39,11 +63,11 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          placeholder="e.g. xyz321@gmail.com.."
+          placeholder="e.g. xyz321@gmail.com."
           value={formData.email}
           onChange={handleChange}
           required
-          style={{ marginTop: "10px", paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
+          style={{content:"*" ,marginTop: "10px", paddingLeft: "5px", boxSizing: "border-box", height: "40px", width: "430px", border: "1px solid #E6E6E6", borderRadius: "10px", color: "#333333", fontSize: "18px" }} />
 
 
         <label htmlFor="password" style={{ marginTop: "30px", fontSize: "17px",fontWeight:"500" }}>Password:</label>
@@ -51,7 +75,7 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          placeholder="e.g.xyz@6397.."
+          placeholder="e.g.xyz@6397."
           value={formData.password}
           onChange={handleChange}
           required

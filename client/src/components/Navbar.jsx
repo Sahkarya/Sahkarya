@@ -1,5 +1,7 @@
 const Navbar = () => {
   const customCSS = {
+    position:"abslute",
+    width:"100%",
     height: "6.4rem",
     fontSize: "1.6rem",
     backgroundColor: "#002447",
