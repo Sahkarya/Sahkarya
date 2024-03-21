@@ -14,10 +14,32 @@ const RegistrationForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
+
+    // Connecting to backend
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "Application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log("Successfully registered");
+        setFormData({
+          name: "",
+          identity: "",
+          phone: "",
+          email: "",
+          password: "",
+        });
+      }
+    } catch (error) {
+      console.log("error from register : ", error);
+    }
   };
 
   return (

@@ -3,9 +3,19 @@ const express = require("express");
 const connectDB = require("./utilities/db");
 const concernRoute = require("./routers/concern-router");
 const authRoute = require("./routers/auth-router");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+
+// Handling cors
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("The server is Working");
