@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
+
 const About = () => {
   return (
     <>
-      <p>This is the about page</p>
+      This is the about page:
     </>
   );
-};
+}
 
 export default About;
