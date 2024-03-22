@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ const RegistrationForm = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +39,7 @@ const RegistrationForm = () => {
           email: "",
           password: "",
         });
+        navigate("/login");
       }
     } catch (error) {
       console.log("error from register : ", error);

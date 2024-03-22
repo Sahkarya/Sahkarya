@@ -160,7 +160,7 @@ const Concern = () => {
               className="problem"
               style={{ fontSize: "18px", fontWeight: "600", marginLeft: "7px" }}
             >
-              Everyone can share your problem
+              Share you concern
             </span>
           </div>
           <div className="bottom">
