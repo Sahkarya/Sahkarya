@@ -6,8 +6,8 @@ const registrationSchema = z.object({
     .trim()
     .min(3, { message: "Name should be at least 3 letter long" }),
 
-  identity: z.number(),
-  phone: z.number().min(10, { message: "Number must be atleat 10 digits" }),
+  identity: z.string(),
+  phone: z.string().min(10, { message: "Number must be atleat 10 digits" }),
 
   email: z
     .string({ required: "Email is required" })

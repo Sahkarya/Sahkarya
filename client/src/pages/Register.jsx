@@ -23,7 +23,7 @@ const RegistrationForm = () => {
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
-          "Content-Type": "Application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -98,7 +98,7 @@ const RegistrationForm = () => {
           Identity:
         </label>
         <input
-          type="integer"
+          type="number"
           id="identity"
           name="identity"
           placeholder="Enter your Id number."
@@ -124,7 +124,7 @@ const RegistrationForm = () => {
           Phone:
         </label>
         <input
-          type="tel"
+          type="number"
           id="phone"
           name="phone"
           placeholder="Your mobile number."

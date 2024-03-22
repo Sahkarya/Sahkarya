@@ -17,6 +17,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("The server is Working");
 });
