@@ -9,6 +9,7 @@ import About from "./pages/About";
 import Concern from "./pages/Concern";
 import Login from "./pages/Login";
 import RegistrationForm from "./pages/Register";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

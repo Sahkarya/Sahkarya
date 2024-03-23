@@ -140,15 +140,20 @@ const Login = () => {
       <div
         style={{
           display: "flex",
-          marginTop: "10px",
+          marginTop: "2.4rem",
           justifyContent: "center",
           fontWeight: "400",
-          fontSize: "1.5rem",
+          fontSize: "1.2rem",
         }}
       >
-        <p style={{ border: "1px solid black", width: "30%", padding: ".5em" }}>
+        <p
+          style={{ width: "20rem", padding: ".5em", border: "1px solid #ccc" }}
+        >
           Don't have an account?
-          <a href="\register" style={{ textDecoration: "none" }}>
+          <a
+            href="/register"
+            style={{ textDecoration: "none", marginLeft: ".5rem" }}
+          >
             Sign Up
           </a>
         </p>
