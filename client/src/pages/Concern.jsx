@@ -1,12 +1,29 @@
 import React, { useRef, useState } from "react";
-import "./concern.css"; // Assuming a separate CSS file
+import "./concern.css";
+import { useAuth } from "../store/auth";
 
 const Concern = () => {
   const [formData, setFormData] = useState({
+    email: "",
     message: "",
     address: "",
     department: "",
+    image: "",
   });
+
+  const [userData, setUserData] = useState(true);
+  const { user } = useAuth();
+
+  if (user && userData) {
+    setFormData({
+      email: user.email,
+      address: "",
+      department: "",
+      image: "",
+    });
+    setUserData(false);
+  }
+
   const [charCount, setCharCount] = useState(500);
   const inputRef = useRef(null);
 
@@ -58,10 +75,25 @@ const Concern = () => {
     setIsFocused(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    // Handle form submission logic here (e.g., send data to server)
+
+    // Backend logic
+    try {
+      const response = await fetch("http://localhost:5000/api/form/concern", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        console.log("Concern sent successfully");
+      }
+    } catch (error) {
+      console.log("Error while sending the message", error);
+    }
   };
 
   return (

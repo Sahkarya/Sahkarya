@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const RegistrationForm = () => {
   });
 
   const navigate = useNavigate();
+  const { storeTokenInLS } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +21,6 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     // Connecting to backend
     try {
@@ -31,6 +32,9 @@ const RegistrationForm = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
+        const res_data = await response.json();
+        storeTokenInLS(res_data.token);
+
         console.log("Successfully registered");
         setFormData({
           name: "",
