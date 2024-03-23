@@ -18,15 +18,16 @@ const register = async (req, res, next) => {
     });
     res.status(201).json({
       msg: "User Successfully registered",
+      token: await userCreated.generateToken(),
+      userId: userCreated.id.toString(),
     });
   } catch (error) {
-    res.status(500).json("internal server error");
     next(error);
   }
 };
 
 // Login Logic
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const userExist = await User.findOne({ email });
@@ -35,7 +36,11 @@ const login = async (req, res, next) => {
     }
     const passwordValid = await userExist.comparePassword(password);
     if (passwordValid) {
-      res.status(200).json({ msg: "Login Successful" });
+      res.status(200).json({
+        msg: "Login Successful",
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString(),
+      });
     } else {
       res.status(401).json({ message: "Invalid email or password" });
     }
