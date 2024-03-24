@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../store/auth";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -11,47 +9,21 @@ const RegistrationForm = () => {
     password: "",
   });
 
-  const navigate = useNavigate();
-  const { storeTokenInLS } = useAuth();
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Connecting to backend
-    try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        const res_data = await response.json();
-        storeTokenInLS(res_data.token);
-
-        console.log("Successfully registered");
-        setFormData({
-          name: "",
-          identity: "",
-          phone: "",
-          email: "",
-          password: "",
-        });
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log("error from register : ", error);
-    }
+    // Handle form submission logic here
+    console.log(formData);
   };
 
   return (
-    <div>
+    <>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    < div style={{height:"100%"}}>
       <h2
         style={{
           color: "rgb(0, 36, 71)",
@@ -106,7 +78,7 @@ const RegistrationForm = () => {
           Identity:
         </label>
         <input
-          type="number"
+          type="integer"
           id="identity"
           name="identity"
           placeholder="Enter your Id number."
@@ -132,7 +104,7 @@ const RegistrationForm = () => {
           Phone:
         </label>
         <input
-          type="number"
+          type="tel"
           id="phone"
           name="phone"
           placeholder="Your mobile number."
@@ -207,7 +179,7 @@ const RegistrationForm = () => {
           }}
         />
 
-        <button
+        <button id="btn"
           type="submit"
           style={{
             fontWeight: "500",
@@ -227,6 +199,32 @@ const RegistrationForm = () => {
         </button>
       </form>
     </div>
+      <footer className="footer" style={{ position:"inherit",bottom:"0", width:"100%"}}>
+        <p style={{ color: "white" }}>&copy; 2024 Sahkarya. All rights reserved.</p>
+        <div id='icon' style={{color:"white"}}>
+          <i class="ri-instagram-fill" style={{marginRight:"20px"}}></i>
+          <i class="ri-twitter-x-fill" style={{marginRight:"20px"}}></i>
+          <i class="ri-code-box-fill" style={{marginRight:"20px"}}></i>
+        </div>
+      </footer>
+      <style jsx>{`
+      .footer {
+        text-align: center;
+        margin-top: 2rem;
+        padding: 1rem;
+        background-color: #002447;
+      }
+      #icon i:hover{
+        
+        cursor: pointer;
+        
+        color: #ffc107;
+      }
+      #btn:hover{
+        color: white;
+      }
+      `}</style>
+    </>
   );
 };
 
