@@ -1,16 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
 
-.problem:hover{
-    color: white;
-}
 
-.privacy i:hover{
-    color: white;
-}
-.privacy:hover,
+
 .icons li:hover {
-    background: #ffde70;
+    background: #ffc107;
     color: white;
 }
 
@@ -62,7 +56,7 @@
     border-radius: 50px;
     font-size: 16px;
     font-weight: 700;
-    background: #ffd455;
+    background: #ffc107;
     color: black;
     cursor: pointer;
     opacity: .9;
@@ -76,9 +70,21 @@
 }
 
 .bottom button:hover {
-    background: #eec754;
+    background: #ffc107;
     color: white;
 }
+.footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #002447;
+  }
+  #icon i:hover{
+    
+    cursor: pointer;
+    
+    color: #ffc107;
+  }
 
 @media screen and (max-width: 600px) {
     .wrapper {
