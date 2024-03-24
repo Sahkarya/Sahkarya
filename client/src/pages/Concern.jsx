@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 
@@ -11,13 +11,37 @@ const Concern = () => {
     image: "",
   });
 
+  const [coords, setCoords] = useState({ latitude: null, longitude: null });
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoords({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          setErrorMessage(error.message);
+        }
+      );
+    } else {
+      setErrorMessage("Geolocation is not supported by this browser.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   const [userData, setUserData] = useState(true);
   const { user } = useAuth();
 
   if (user && userData) {
+    console.log(coords);
     setFormData({
       email: user.email,
-      address: "",
+      address: coords.latitude + " " + coords.longitude,
       department: "",
       image: "",
     });
@@ -67,14 +91,6 @@ const Concern = () => {
   // Consider using a state variable or useRef for focused state management
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
@@ -90,6 +106,15 @@ const Concern = () => {
       });
       if (response.ok) {
         console.log("Concern sent successfully");
+        alert("Seccessfull ");
+        setFormData({
+          email: user.email,
+          message: "",
+          address: "",
+          department: "",
+          image: "",
+        });
+        setCharCount(500);
       }
     } catch (error) {
       console.log("Error while sending the message", error);
@@ -152,8 +177,6 @@ const Concern = () => {
                 className={`input editable ${isFocused ? "focused" : ""}`}
                 value={formData.message}
                 onChange={handleChange}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
                 placeholder="What's on your mind"
                 maxLength={500} // Added maxLength for character limit
                 style={{
