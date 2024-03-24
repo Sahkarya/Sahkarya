@@ -1,4 +1,4 @@
-import { HEBREW_BIN } from 'mysql/lib/protocol/constants/charsets';
+
 import React, { useState } from 'react';
 
 const About = () => {

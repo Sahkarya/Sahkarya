@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import './concern.css'; // Assuming a separate CSS file
-
 const Concern = () => {
   const [formData, setFormData] = useState({
     message: "",
     address: "",
     department: "",
   });
+  const[mapToggle, setMapToggle] = useState(false);
   const [charCount, setCharCount] = useState(500);
   const inputRef = useRef(null);
 
@@ -56,6 +56,23 @@ const Concern = () => {
     console.log(formData);
     // Handle form submission logic here (e.g., send data to server)
   };
+
+  // const searchMap = ()=>{
+  //   console.log("map")
+  //   var optional_config = {
+  //     location: [28.61, 77.23],
+  //     region: "IND",
+  //     height: 300,
+  //   };
+  //   const mapplsClassObject = new mappls();
+  //   const mapplsPluginObject = new mappls_plugin();
+    
+  //   var search = mapplsPluginObject.search("agra",optional_config,(data) => {
+  //     console.log(data); /* get search data in console */
+  //   });
+  //   console.log(search)
+  // }
+  
   
   return (
     <>
@@ -63,7 +80,7 @@ const Concern = () => {
         href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
         rel="stylesheet"
       />
-      <div id="body" className="body-container" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "100vh"}}> {/* Added a class for styling */}
+      <div id="body" className="body-container" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "90vh"}}> {/* Added a class for styling */}
         <div className="wrapper" style={{ background: "#fff", maxWidth: "475px", width: "100%", borderRadius: "15px", padding: "25px 25px 15px 25px", boxShadow: "0px 10px 15px 10px rgba(0,0,0,0.1)" }}>
               <div className="privacy" style={{ color: "#ffc107", margin: "15px 0", display: "inline-flex", alignItems: "center", padding: "7px 10px", borderRadius: "50px", cursor: "pointer", transition: "background 0.2s ease" }}>
                 <i className="ri-chat-new-fill"></i>
@@ -87,6 +104,12 @@ const Concern = () => {
               />
             </div>
           </div>
+          <div className="Map-container">
+
+            { mapToggle && <MapContainer/>} 
+
+          </div>
+          
           <div className="bottom">
             <ul className="icons">
               <li>
@@ -94,15 +117,15 @@ const Concern = () => {
                 <input type="file" ref={inputRef} onClick={handleImageChange} style={{ display: "none" }} />
               </li>
               <li>
-                <i className="ri-community-fill"></i>
+                <i className="ri-community-fill" ></i>
               </li>
               <li>
-                <i className="ri-map-pin-fill"></i>
+                <i  className="ri-map-pin-fill" onClick={()=>setMapToggle(!mapToggle)}></i>
                </li>
             </ul>
             <div className="content">
               <span className="counter">{charCount}</span>
-              <button disabled={charCount === 500} value={formData.handleSubmit} onClick={handleSubmit}>
+              <button disabled={charCount === 500} value={formData.handleSubmit} onClick={(handleSubmit)}>
                 Post
               </button>
             </div>
