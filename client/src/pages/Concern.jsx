@@ -235,16 +235,7 @@ const Concern = () => {
               <li>
                 <i className="ri-map-pin-fill"></i>
               </li>
-              {/* <li > {/* Disable click if there's an error 
-                <i className="ri-map-pin-fill" onClick={locationError ? null : getLocation}></i>
-                {formData.address && !locationError ? (
-                  <span className="address-tooltip">{formData.address}</span>
-                ) : (
-                  <span className="address-tooltip">
-                    {locationError ? locationError : "Click to access location"}
-                  </span>
-                )}
-              </li> */}
+             
             </ul>
             <div className="content">
               <span className="counter">{charCount}</span>

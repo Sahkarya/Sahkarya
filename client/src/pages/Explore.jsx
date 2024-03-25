@@ -5,7 +5,7 @@ const Explore = () => {
       <>
       <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
       <div>
-      <p>This is explore page:</p>
+      <p style={{color:"red"}}>This is explore page:</p>
       </div>
       <footer className="footer" style={{position:"absolute", bottom:"0", width:"100%"}}>
         <p style={{ color: "white" }}>&copy; 2024 Sahkarya. All rights reserved.</p>
