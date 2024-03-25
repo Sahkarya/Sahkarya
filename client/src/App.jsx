@@ -24,6 +24,7 @@ function App() {
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
