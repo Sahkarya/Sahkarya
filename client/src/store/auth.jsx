@@ -33,8 +33,15 @@ export const AuthProvider = ({ children }) => {
     userAuthentication();
   }, []);
 
+  const LogoutUser = () => {
+    setToken("");
+    return localStorage.removeItem("token");
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, storeTokenInLS, user }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, storeTokenInLS, user, LogoutUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

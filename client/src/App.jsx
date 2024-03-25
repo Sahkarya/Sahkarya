@@ -10,6 +10,8 @@ import Concern from "./pages/Concern";
 import Login from "./pages/Login";
 import RegistrationForm from "./pages/Register";
 import Footer from "./components/Footer";
+import Admin from "./pages/Admin";
+import { Logout } from "./pages/Logout";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/concern" element={<Concern />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -44,13 +44,7 @@ const Navbar = () => {
                 >
                   Raise a Concern
                 </a>
-                <a
-                  className="nav-link"
-                  href="/register"
-                  style={{ color: "white" }}
-                >
-                  Register
-                </a>
+
                 <a
                   className="nav-link"
                   href="/login"
@@ -62,7 +56,6 @@ const Navbar = () => {
             </div>
           </div>
         </nav>
-        
       </div>
     </>
   );

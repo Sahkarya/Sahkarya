@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+
+  const { storeTokenInLS } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +31,8 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
+        const res_data = await response.json();
+        storeTokenInLS(res_data.token);
         console.log("Succesful Login, Welcome to the Platform");
         setFormData({
           email: "",
