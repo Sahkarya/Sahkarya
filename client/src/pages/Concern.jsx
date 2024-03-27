@@ -11,6 +11,8 @@ const Concern = () => {
     image: "",
   });
 
+  const { isLoggedIn } = useAuth();
+
   const [coords, setCoords] = useState({ latitude: null, longitude: null });
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -37,7 +39,7 @@ const Concern = () => {
   const [userData, setUserData] = useState(true);
   const { user } = useAuth();
 
-  if (user && userData) {
+  if (user && userData && coords.latitude != null) {
     console.log(coords);
     setFormData({
       email: user.email,
@@ -49,6 +51,7 @@ const Concern = () => {
   }
 
   const [charCount, setCharCount] = useState(500);
+
   const inputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -120,6 +123,44 @@ const Concern = () => {
       console.log("Error while sending the message", error);
     }
   };
+
+  if (!isLoggedIn) {
+    return (
+      <>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <p style={{ fontSize: "3.2rem" }}>
+              You need to login to share your concern!
+            </p>
+            <a href="/login">
+              <button
+                type="submit"
+                style={{
+                  fontWeight: "500",
+                  height: "40px",
+                  width: "245px",
+                  marginTop: "30px",
+                  borderRadius: "10px",
+                  border: "none",
+                  backgroundColor: "#ffc107",
+                  paddingTop: "5px",
+                }}
+              >
+                Login Here
+              </button>
+            </a>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -235,7 +276,6 @@ const Concern = () => {
               <li>
                 <i className="ri-map-pin-fill"></i>
               </li>
-             
             </ul>
             <div className="content">
               <span className="counter">{charCount}</span>

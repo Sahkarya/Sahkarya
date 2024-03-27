@@ -30,6 +30,7 @@ const Admin = () => {
           Refresh
         </button>
       </div>
+      <input type="file" />
     </>
   );
 };

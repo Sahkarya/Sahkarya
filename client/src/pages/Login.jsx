@@ -139,7 +139,7 @@ const Login = () => {
             paddingTop: "5px",
           }}
         >
-          Sign In
+          Log In
         </button>
       </form>
       <div

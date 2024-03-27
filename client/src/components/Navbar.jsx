@@ -1,3 +1,6 @@
+import { useAuth } from "../store/auth";
+import { useEffect } from "react";
+
 const Navbar = () => {
   const customCSS = {
     position: "abslute",
@@ -7,6 +10,15 @@ const Navbar = () => {
     backgroundColor: "#002447",
     color: "yellow",
   };
+
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    const forceUpdate = () => {
+      window.dispatchEvent(new Event("resize"));
+    };
+    forceUpdate();
+  }, [isLoggedIn]);
 
   return (
     <>
@@ -45,13 +57,23 @@ const Navbar = () => {
                   Raise a Concern
                 </a>
 
-                <a
-                  className="nav-link"
-                  href="/login"
-                  style={{ color: "white" }}
-                >
-                  Login
-                </a>
+                {isLoggedIn ? (
+                  <a
+                    className="nav-link"
+                    href="/logout"
+                    style={{ color: "white" }}
+                  >
+                    Logout
+                  </a>
+                ) : (
+                  <a
+                    className="nav-link"
+                    href="/login"
+                    style={{ color: "white" }}
+                  >
+                    Login
+                  </a>
+                )}
               </div>
             </div>
           </div>
