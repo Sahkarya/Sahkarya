@@ -4,6 +4,7 @@ const connectDB = require("./utilities/db");
 const concernRoute = require("./routers/concern-router");
 const authRoute = require("./routers/auth-router");
 const cors = require("cors");
+const adminDataRoute = require("./routers/data-router");
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/form", concernRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/data", adminDataRoute);
 
 const PORT = 5000;
 connectDB().then(() => {
