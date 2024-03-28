@@ -1,12 +1,24 @@
-import Map from "./Map";
-const MapContainer = ()=>{
-    
+import { useState } from "react";
+import '../pages/concern.css';
+import Maps from "./Maps";
+import {SearchBox} from "./SearchBox";
+
+const MapContainer = (prop)=>{
+    const [selectPosition, setSelectPosition] = useState(null);
+    const {formData, setFormData} = prop;
+    const sharedState = {selectPosition, setSelectPosition, formData, setFormData}
     return(
-        <div >
-            <div className="map-label" style={{ color: "#ffc107", marginTop: "0px", marginBottom: "5px", display: "inline-flex", alignItems: "center", padding: "7px 10px", borderRadius: "50px", cursor: "pointer", transition: "background 0.2s ease" }}>
+        <>
+        <div className="map-label" style={{ color: "#ffc107", marginTop: "0px", marginBottom: "5px", display: "inline-flex", alignItems: "center", padding: "7px 10px", borderRadius: "50px", cursor: "pointer", transition: "background 0.2s ease" }}>
                 <i className="ri-map-pin-fill"></i>
                 <span className="map-label-content" style={{ fontSize: "18px", fontWeight: "600", marginLeft: "7px" }}>Enter the Location</span>
               </div>
+        <div style={{ width: "100%" }}>
+            
+        <SearchBox sharedState={sharedState} />
+      </div>
+        <div >
+            
             <div style={{display: 'flex',
             position: "relative",
             zIndex: '1',
@@ -18,10 +30,16 @@ const MapContainer = ()=>{
             justifyContent: 'center',
             border: '2px solid #808080',
             borderRadius: '5px',
-            alignItems: 'center'}}><Map /></div>
+            alignItems: 'center'}}>
+            <div style={{ width: "50vw", height: "100%" }}>
+        <Maps selectPosition={selectPosition}/>
+      </div>
+      
+    </div>
             
             
         </div>
+        </>
     );
 };
 

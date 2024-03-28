@@ -1,8 +1,31 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState , useEffect} from "react";
 import './concern.css'; // Assuming a separate CSS file
-import MapContainer from '../components/MapContainer'
-
+import MapContainer from '../components/MapContainer';
+var currLoc;
 const Concern = () => {
+  const [coords, setCoords] = useState({ latitude: null, longitude: null });
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoords({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          currLoc = coords;
+        },
+        (error) => {
+          setErrorMessage(error.message);
+        }
+      );
+    } else {
+      setErrorMessage("Geolocation is not supported by this browser.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
   const [formData, setFormData] = useState({
     message: "",
     address: "",
@@ -55,25 +78,11 @@ const Concern = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     console.log(formData);
     // Handle form submission logic here (e.g., send data to server)
   };
 
-  // const searchMap = ()=>{
-  //   console.log("map")
-  //   var optional_config = {
-  //     location: [28.61, 77.23],
-  //     region: "IND",
-  //     height: 300,
-  //   };
-  //   const mapplsClassObject = new mappls();
-  //   const mapplsPluginObject = new mappls_plugin();
-    
-  //   var search = mapplsPluginObject.search("agra",optional_config,(data) => {
-  //     console.log(data); /* get search data in console */
-  //   });
-  //   console.log(search)
-  // }
   
   
   return (
@@ -108,7 +117,7 @@ const Concern = () => {
           </div>
           <div className="Map-container">
 
-            { mapToggle && <MapContainer/>} 
+            { mapToggle && <MapContainer formData={formData} setFormData={setFormData} />} 
 
           </div>
           
@@ -148,5 +157,5 @@ const Concern = () => {
 };
 
 
-export default Concern;
+export {Concern,currLoc};
 
