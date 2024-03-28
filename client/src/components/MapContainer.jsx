@@ -5,8 +5,10 @@ import {SearchBox} from "./SearchBox";
 
 const MapContainer = (prop)=>{
     const [selectPosition, setSelectPosition] = useState(null);
+    const [locationSelection, setLocationSelection] = useState([28.6139,77.2090]);
     const {formData, setFormData} = prop;
-    const sharedState = {selectPosition, setSelectPosition, formData, setFormData}
+    const mapState = {locationSelection, setLocationSelection,selectPosition};
+    const sharedState = {selectPosition, setSelectPosition, formData, setFormData,locationSelection, setLocationSelection}
     return(
         <>
         <div className="map-label" style={{ color: "#ffc107", marginTop: "0px", marginBottom: "5px", display: "inline-flex", alignItems: "center", padding: "7px 10px", borderRadius: "50px", cursor: "pointer", transition: "background 0.2s ease" }}>
@@ -32,7 +34,7 @@ const MapContainer = (prop)=>{
             borderRadius: '5px',
             alignItems: 'center'}}>
             <div style={{ width: "50vw", height: "100%" }}>
-        <Maps selectPosition={selectPosition}/>
+        <Maps mapState={mapState}/>
       </div>
       
     </div>

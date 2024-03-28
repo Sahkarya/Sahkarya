@@ -49,8 +49,8 @@ function ResetCenterView(props) {
   }
   
   export default function Maps(props) {
-  const [locationSelection, setLocationSelection] = useState([28.6139,77.2090]); //coords - null value error
-  const { selectPosition} = props;
+  // const [locationSelection, setLocationSelection] = useState([28.6139,77.2090]); //coords - null value error
+  const { locationSelection, setLocationSelection, selectPosition} = props.mapState;
   useEffect(()=>{
     if(selectPosition != tempSelectPosition){
       setLocationSelection([selectPosition?.lat, selectPosition?.lon]);

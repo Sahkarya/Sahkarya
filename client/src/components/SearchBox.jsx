@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -13,13 +13,16 @@ const params = {
 };
 
 export function SearchBox(props) {
-  const { selectPosition, setSelectPosition, formData, setFormData} = props.sharedState;
+  const { selectPosition, setSelectPosition, formData, setFormData,locationSelection, setLocationSelection} = props.sharedState;
   const [searchText, setSearchText] = useState("");
   const [pickedAddress, setAddress] = useState({lat : null,lon : null});
   const [listPlace, setListPlace] = useState([]);
   
+  useEffect(()=>{
+    setFormData({...formData,address : pickedAddress});
+  },[pickedAddress]) 
   const handleSearch = (value)=> {  
-    setSearchText(value);   
+    setSearchText(value);  
     const params = {
                 q: value,
                 format: "json",
@@ -37,6 +40,22 @@ export function SearchBox(props) {
                   setListPlace(JSON.parse(result));
                 })
                 .catch((err) => console.log("err: ", err)); 
+  }
+  const handleCordSearch = (coords)=>{
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    let url = `${NOMINATIM_BASE_URL}q=${coords[0]}%2C${coords[1]}&format=jsonv2`
+    console.log(url)
+    fetch(`${NOMINATIM_BASE_URL}q=${coords[0]}%2C${coords[1]}&format=jsonv2`, requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        setSearchText(JSON.parse(result)[0].display_name);
+      })
+      .catch((err) => console.log("err: ", err));
+   
+    // setSearchText(display_name);
   }
 
   return (
@@ -67,8 +86,10 @@ export function SearchBox(props) {
     transition: 'background 0.2s ease'}}
             
             onClick={() => {
-              console.log(pickedAddress);
-              setFormData({...formData,address : pickedAddress});
+              console.log("pic" + pickedAddress);
+              console.log("loc " +locationSelection);
+              setAddress({lat : locationSelection[0], lon : locationSelection[1]});
+              handleCordSearch(locationSelection);
               //Location picking funtion - yet to be made
             }}
           >
@@ -86,8 +107,9 @@ export function SearchBox(props) {
                   onClick={() => {
                     setSelectPosition(item);
                     setSearchText(item?.display_name);
-                    setAddress({lat : item?.lat, lon : item?.lon});
+                    
                     setListPlace([]); //cleaning the list
+                    
                   }}
                 >
                   <ListItemIcon>
