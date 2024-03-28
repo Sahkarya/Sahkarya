@@ -61,14 +61,21 @@ const About = () => {
           touch with us today to learn more about our solutions and how we can
           help you tackle dustbin overflow and trash issues in your area.
         </p>
-        <p className="end-note">
-          Together, let's build a brighter tomorrow, one bin at a time.
-        </p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <p className="end-note">
+            Together, let's build a brighter tomorrow, one bin at a time.
+          </p>
+        </div>
       </div>
 
       <style jsx>{`
         .about-page {
-          padding: 2rem;
           max-width: 60%;
           margin: 0 auto;
         }

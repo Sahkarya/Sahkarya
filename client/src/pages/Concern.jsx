@@ -169,14 +169,13 @@ const Concern = () => {
         rel="stylesheet"
       />
       <div
-        id="body"
         className="body-container"
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
-          backgroundColor: "rgb(216 220 223)",
+          backgroundColor: "#fff",
         }}
       >
         {" "}
@@ -184,20 +183,41 @@ const Concern = () => {
         <div
           className="wrapper"
           style={{
-            background: "#fff",
-            maxWidth: "475px",
+            background: "#ddddde5c",
+            height: "400px",
+            maxWidth: "700px",
             width: "100%",
             borderRadius: "15px",
             padding: "25px 25px 15px 25px",
-            boxShadow: "0px 10px 15px rgba(0,0,0,0.1)",
+            boxShadow: "0px 10px 15px 10px rgba(0,0,0,0.1)",
           }}
         >
+          <div
+            className="privacy"
+            style={{
+              color: "#ffc107",
+              margin: "8px 0",
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "7px 10px",
+              borderRadius: "50px",
+              transition: "background 0.2s ease",
+            }}
+          >
+            <i className="ri-chat-new-fill" style={{ fontSize: "25px" }}></i>
+            <span
+              className="problem"
+              style={{ fontSize: "25px", fontWeight: "600", marginLeft: "7px" }}
+            >
+              Share you Concern
+            </span>
+          </div>
           <div
             className="input-box"
             style={{
               position: "relative",
-              minHeight: "130px",
-              maxHeight: "170px",
+              minHeight: "220px",
+              maxHeight: "250px",
               overflowY: "auto",
             }}
           >
@@ -210,9 +230,6 @@ const Concern = () => {
                 color: "#98a5b1",
               }}
             >
-              {/* {isFocused ? null : (
-                <span className="placeholder">What's on your mind?</span>
-              )} */}
               <textarea
                 type="text" // Changed to a standard input type
                 className={`input editable ${isFocused ? "focused" : ""}`}
@@ -221,10 +238,10 @@ const Concern = () => {
                 placeholder="What's on your mind"
                 maxLength={500} // Added maxLength for character limit
                 style={{
-                  height: "120px",
-                  width: "420px",
+                  height: "200px",
+                  width: "650px",
                   marginTop: "5px",
-                  background: "rgb(247 247 246)",
+                  background: "#fff",
                   borderRadius: "10px",
                   paddingLeft: "6px",
                   outline: "none",
@@ -237,27 +254,6 @@ const Concern = () => {
                 }}
               />
             </div>
-          </div>
-          <div
-            className="privacy"
-            style={{
-              color: "#ffc107",
-              margin: "15px 0",
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "7px 10px",
-              borderRadius: "50px",
-              cursor: "pointer",
-              transition: "background 0.2s ease",
-            }}
-          >
-            <i className="ri-chat-new-fill"></i>
-            <span
-              className="problem"
-              style={{ fontSize: "18px", fontWeight: "600", marginLeft: "7px" }}
-            >
-              Share you concern
-            </span>
           </div>
           <div className="bottom">
             <ul className="icons">
@@ -284,7 +280,7 @@ const Concern = () => {
                 value={formData.handleSubmit}
                 onClick={handleSubmit}
               >
-                Send
+                Post
               </button>
             </div>
           </div>
