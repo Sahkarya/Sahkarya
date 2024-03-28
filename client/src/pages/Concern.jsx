@@ -58,7 +58,7 @@ const Concern = () => {
     inputRef.current.click();
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
       const allowedExtensions = ["jpg", "jpeg", "png"]; // Add allowed extensions
@@ -78,8 +78,12 @@ const Concern = () => {
         );
         return;
       }
-      console.log(file);
-      setImage("");
+      const base64 = await convertToBase64(file);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        image: base64,
+      }));
+      console.log(formData);
     } else {
       console.warn("No file selected");
     }
@@ -291,3 +295,16 @@ const Concern = () => {
 };
 
 export default Concern;
+
+function convertToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+}
