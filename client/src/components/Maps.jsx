@@ -13,6 +13,7 @@ let locate = false;
 let tempSelectPosition = null;
 function ResetCenterView(props) {
 
+
   const { locationSelection, setLocationSelection } = props;
   const map = useMap();
   
@@ -29,11 +30,13 @@ function ResetCenterView(props) {
     }
     
     if(!locate){
+
       const lc = new Locate(locateOptions);
       lc.addTo(map);
       locate = true;
     }
     if (locationSelection) {
+
       map.setView(
         L.latLng(locationSelection),
         map.getZoom(),
@@ -58,17 +61,18 @@ function ResetCenterView(props) {
     }
   })
   
+
   return (
     <MapContainer
       center={locationSelection}
       zoom={12}
       style={{ width: "425px", height: "250px" }}
     >
-      
+
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=DLq69hXJiw2uSGwxZWRf"
-      />
+
       
         <Marker position={locationSelection} icon={icon}>
           <Popup>
@@ -77,7 +81,7 @@ function ResetCenterView(props) {
         </Marker>
          
       <ResetCenterView locationSelection={locationSelection} setLocationSelection={setLocationSelection}/>
-      
+
     </MapContainer>
   );
 }

@@ -1,10 +1,14 @@
+
 import React, { useEffect, useState} from "react";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+
 import '../pages/concern.css';
+
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 const params = {
   q: "",
@@ -13,6 +17,7 @@ const params = {
 };
 
 export function SearchBox(props) {
+
   const { selectPosition, setSelectPosition, formData, setFormData,locationSelection, setLocationSelection} = props.sharedState;
   const [searchText, setSearchText] = useState("");
   const [pickedAddress, setAddress] = useState({lat : null,lon : null});
@@ -42,6 +47,7 @@ export function SearchBox(props) {
                 .catch((err) => console.log("err: ", err)); 
   }
   const handleCordSearch = (coords)=>{
+
     const requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -49,12 +55,13 @@ export function SearchBox(props) {
     let url = `${NOMINATIM_BASE_URL}q=${coords[0]}%2C${coords[1]}&format=jsonv2`
     console.log(url)
     fetch(`${NOMINATIM_BASE_URL}q=${coords[0]}%2C${coords[1]}&format=jsonv2`, requestOptions)
+
       .then((response) => response.text())
       .then((result) => {
         setSearchText(JSON.parse(result)[0].display_name);
       })
       .catch((err) => console.log("err: ", err));
-   
+
     // setSearchText(display_name);
   }
 
@@ -62,7 +69,9 @@ export function SearchBox(props) {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <div style={{ display: "flex" }}>
         <div style={{ flex: 1 }}>
+
           <input type="text" class="form-control"
+
             style={{ width: "100%" }}
             value={searchText}
             onChange={(event) => {
@@ -89,6 +98,7 @@ export function SearchBox(props) {
               console.log("pic" + pickedAddress);
               console.log("loc " +locationSelection);
               setAddress({lat : locationSelection[0], lon : locationSelection[1]});
+
               handleCordSearch(locationSelection);
               //Location picking funtion - yet to be made
             }}
@@ -103,13 +113,15 @@ export function SearchBox(props) {
             return (
               <div key={item?.place_id}>
                 <ListItem 
+
                   button
                   onClick={() => {
                     setSelectPosition(item);
                     setSearchText(item?.display_name);
-                    
+
                     setListPlace([]); //cleaning the list
                     
+
                   }}
                 >
                   <ListItemIcon>
@@ -130,5 +142,3 @@ export function SearchBox(props) {
     </div>
   );
 }
-
-

@@ -1,14 +1,27 @@
+import { useAuth } from "../store/auth";
+import { useEffect } from "react";
+
 const Navbar = () => {
   const customCSS = {
+
     position:"abslute",
     width:"100%",
     height: "10vh",
+
     fontSize: "1.6rem",
     backgroundColor: "#002447",
     color: "yellow",
   };
- 
- 
+
+  const { isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    const forceUpdate = () => {
+      window.dispatchEvent(new Event("resize"));
+    };
+    forceUpdate();
+  }, [isLoggedIn]);
+
   return (
     <>
       <div>
@@ -27,15 +40,14 @@ const Navbar = () => {
                 <a
                   className="nav-link"
                   href="/explore"
-                  style={{color:"white"}}
-                  
+                  style={{ color: "white" }}
                 >
                   Explore
                 </a>
                 <a
                   className="nav-link"
                   href="/about"
-                  style={{ color: "white",  }}
+                  style={{ color: "white" }}
                 >
                   About Us
                 </a>
@@ -46,29 +58,31 @@ const Navbar = () => {
                 >
                   Raise a Concern
                 </a>
-                <a
-                  className="nav-link"
-                  href="/register"
-                  style={{ color: "white" }}
-                >
-                  Register
-                </a>
-                <a
-                  className="nav-link"
-                  href="/login"
-                  style={{ color: "white" }}
-                >
-                  Login
-                </a>
+
+                {isLoggedIn ? (
+                  <a
+                    className="nav-link"
+                    href="/logout"
+                    style={{ color: "white" }}
+                  >
+                    Logout
+                  </a>
+                ) : (
+                  <a
+                    className="nav-link"
+                    href="/login"
+                    style={{ color: "white" }}
+                  >
+                    Login
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </nav>
-        
       </div>
     </>
   );
 };
-
 
 export default Navbar;
