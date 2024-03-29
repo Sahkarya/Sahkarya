@@ -22,7 +22,7 @@ export function SearchBox(props) {
     setLocationSelection,
   } = props.sharedState;
   const [searchText, setSearchText] = useState("");
-  const [pickedAddress, setAddress] = useState({ lat: null, lon: null });
+  const [pickedAddress, setAddress] = useState("");
   const [listPlace, setListPlace] = useState([]);
 
   useEffect(() => {
@@ -102,10 +102,11 @@ export function SearchBox(props) {
             onClick={() => {
               console.log("pic" + pickedAddress);
               console.log("loc " + locationSelection);
-              setAddress({
-                lat: locationSelection[0],
-                lon: locationSelection[1],
-              });
+              setAddress(
+                String(locationSelection[0]) +
+                  " " +
+                  String(locationSelection[1])
+              );
               handleCordSearch(locationSelection);
               //Location picking funtion - yet to be made
             }}
