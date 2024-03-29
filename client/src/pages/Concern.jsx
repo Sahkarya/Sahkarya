@@ -1,10 +1,13 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 import MapContainer from "../components/MapContainer";
 var currLoc;
-
 const Concern = () => {
+  
+
+ 
   const [formData, setFormData] = useState({
     email: "",
     message: "",
@@ -103,6 +106,7 @@ const Concern = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(formData);
 
     // Backend logic
@@ -130,6 +134,7 @@ const Concern = () => {
       console.log("Error while sending the message", error);
     }
   };
+
 
   if (!isLoggedIn) {
     return (
@@ -175,6 +180,7 @@ const Concern = () => {
         href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
         rel="stylesheet"
       />
+
       <div
         className="body-container"
         style={{
@@ -237,6 +243,7 @@ const Concern = () => {
                 color: "#98a5b1",
               }}
             >
+
               <textarea
                 type="text" // Changed to a standard input type
                 className={`input editable ${isFocused ? "focused" : ""}`}
@@ -263,6 +270,7 @@ const Concern = () => {
             </div>
           </div>
           <div className="Map-container">
+
             {mapToggle && (
               <MapContainer formData={formData} setFormData={setFormData} />
             )}
@@ -279,9 +287,10 @@ const Concern = () => {
                 />
               </li>
               <li>
-                <i className="ri-community-fill"></i>
+                <i className="ri-community-fill" ></i>
               </li>
               <li>
+
                 <i
                   className="ri-map-pin-fill"
                   onClick={() => setMapToggle(!mapToggle)}
@@ -295,6 +304,7 @@ const Concern = () => {
                 value={formData.handleSubmit}
                 onClick={handleSubmit}
               >
+
                 Post
               </button>
             </div>
@@ -305,7 +315,6 @@ const Concern = () => {
   );
 };
 
-export { Concern, currLoc };
 
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -319,3 +328,6 @@ function convertToBase64(file) {
     };
   });
 }
+export { Concern, currLoc };
+
+
