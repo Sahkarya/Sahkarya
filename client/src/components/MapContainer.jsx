@@ -33,7 +33,7 @@ const MapContainer = (prop)=>{
             border: '2px solid #808080',
             borderRadius: '5px',
             alignItems: 'center'}}>
-            <div style={{ width: "50vw", height: "100%" }}>
+            <div style={{ width: "100%", height: "100%" }}>
         <Maps mapState={mapState}/>
       </div>
       

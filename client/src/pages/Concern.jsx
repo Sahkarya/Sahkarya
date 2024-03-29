@@ -1,20 +1,24 @@
-
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect} from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 import MapContainer from "../components/MapContainer";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import { departments, tags } from "../assets/variables";
 var currLoc;
 const Concern = () => {
-  
-
- 
   const [formData, setFormData] = useState({
     email: "",
     message: "",
     address: "",
     department: "",
+    tag: "",
     image: "",
   });
+
+  
+  
 
   const { isLoggedIn } = useAuth();
 
@@ -111,7 +115,7 @@ const Concern = () => {
 
     // Backend logic
     try {
-      const response = await fetch("http://localhost:5000/api/form/concern", {
+      const response = await fetch("http://localhost:80/api/form/concern", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,7 +138,6 @@ const Concern = () => {
       console.log("Error while sending the message", error);
     }
   };
-
 
   if (!isLoggedIn) {
     return (
@@ -197,7 +200,7 @@ const Concern = () => {
           className="wrapper"
           style={{
             background: "#ddddde5c",
-            height: "400px",
+            maxheight: "900px",
             maxWidth: "700px",
             width: "100%",
             borderRadius: "15px",
@@ -243,7 +246,6 @@ const Concern = () => {
                 color: "#98a5b1",
               }}
             >
-
               <textarea
                 type="text" // Changed to a standard input type
                 className={`input editable ${isFocused ? "focused" : ""}`}
@@ -269,8 +271,125 @@ const Concern = () => {
               />
             </div>
           </div>
-          <div className="Map-container">
 
+          <div>
+            <div
+              className="department-label"
+              style={{
+                color: "#ffc107",
+                marginTop: "0px",
+                marginBottom: "5px",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "7px 10px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",
+              }}
+            >
+              <i className="ri-community-fill"></i>
+              <span
+                className="department-label-content"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginLeft: "7px",
+                }}
+              >
+                Choose the department
+              </span>
+            </div>
+            <Autocomplete
+              disablePortal
+              limitTags={1}
+              id="departments"
+              options={departments}
+              onChange={(e, value) => setFormData({ ...formData, department: value })}
+              sx={{ width: 400 }}
+              renderTags={(options) => {
+                return options.map((option) => (
+                  <Box
+                    component="li"
+                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  >
+                    <img
+                      src={option.logo}
+                      style={{
+                        height: "20px",
+                        width: "20px",
+                        marginRight: "10px",
+                      }}
+                    />
+                    {option.description}
+                  </Box>
+                ));
+              }}
+              renderOption={(props, option) => (
+                <Box
+                  component="li"
+                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  {...props}
+                >
+                  <img
+                    src={`./departments/${option.id}.png`}
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                      marginRight: "10px",
+                    }}
+                  />
+                  {option.label}
+                </Box>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Select department"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <div
+              className="tag-label"
+              style={{
+                color: "#ffc107",
+                marginTop: "0px",
+                marginBottom: "5px",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "7px 10px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",
+              }}
+            >
+              <i className="ri-community-fill"></i>
+              <span
+                className="tag-label-content"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginLeft: "7px",
+                }}
+              >
+                Add tags
+              </span>
+            </div>
+            <Autocomplete
+              disablePortal
+              limitTags={1}
+              id="tag"
+              options={tags}
+              sx={{ width: 200 }}
+              onChange={(e, value) => setFormData({ ...formData, tag: value })}
+              renderInput={(params) => (
+                <TextField {...params} variant="outlined" label="Choose Tags" />
+              )}
+            />
+          </div>
+          <div className="Map-container">
             {mapToggle && (
               <MapContainer formData={formData} setFormData={setFormData} />
             )}
@@ -287,10 +406,9 @@ const Concern = () => {
                 />
               </li>
               <li>
-                <i className="ri-community-fill" ></i>
+                <i className="ri-community-fill"></i>
               </li>
               <li>
-
                 <i
                   className="ri-map-pin-fill"
                   onClick={() => setMapToggle(!mapToggle)}
@@ -304,7 +422,6 @@ const Concern = () => {
                 value={formData.handleSubmit}
                 onClick={handleSubmit}
               >
-
                 Post
               </button>
             </div>
@@ -314,7 +431,6 @@ const Concern = () => {
     </>
   );
 };
-
 
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -329,5 +445,3 @@ function convertToBase64(file) {
   });
 }
 export { Concern, currLoc };
-
-

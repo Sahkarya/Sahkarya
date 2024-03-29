@@ -26,7 +26,7 @@ app.use("/api/form", concernRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/data", adminDataRoute);
 
-const PORT = 5000;
+const PORT = 80;
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`);

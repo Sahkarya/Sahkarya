@@ -4,7 +4,7 @@ const Admin = () => {
 
     // Backend logic
     try {
-      const response = await fetch("http://localhost:5000/api/data/admin", {
+      const response = await fetch("http://localhost:80/api/data/admin", {
         method: "GET",
       });
       if (response.ok) {
