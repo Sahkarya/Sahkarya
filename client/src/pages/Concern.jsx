@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
+import MapContainer from "../components/MapContainer";
+var currLoc;
 
 const Concern = () => {
   const [formData, setFormData] = useState({
@@ -50,6 +52,7 @@ const Concern = () => {
     setUserData(false);
   }
 
+  const [mapToggle, setMapToggle] = useState(false);
   const [charCount, setCharCount] = useState(500);
 
   const inputRef = useRef(null);
@@ -259,6 +262,11 @@ const Concern = () => {
               />
             </div>
           </div>
+          <div className="Map-container">
+            {mapToggle && (
+              <MapContainer formData={formData} setFormData={setFormData} />
+            )}
+          </div>
           <div className="bottom">
             <ul className="icons">
               <li>
@@ -274,7 +282,10 @@ const Concern = () => {
                 <i className="ri-community-fill"></i>
               </li>
               <li>
-                <i className="ri-map-pin-fill"></i>
+                <i
+                  className="ri-map-pin-fill"
+                  onClick={() => setMapToggle(!mapToggle)}
+                ></i>
               </li>
             </ul>
             <div className="content">
@@ -294,7 +305,7 @@ const Concern = () => {
   );
 };
 
-export default Concern;
+export { Concern, currLoc };
 
 function convertToBase64(file) {
   return new Promise((resolve, reject) => {
