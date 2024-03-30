@@ -18,6 +18,9 @@ const departments = [
   ];
 
   const tags = [
-    { label: "water leakage", id: 0 },
-    { label: "voilance", id: 1 },];
+    { label: "Toll Tax", id: 1, department_id: 1 },
+    { label: "Land and Estate", id: 2 , department_id :1},
+    { label: "Hospital Administration", id: 3, department_id :1 },
+    { label: "Water Contamination", id: 1, department_id : 8 }
+];
   export {departments, tags};

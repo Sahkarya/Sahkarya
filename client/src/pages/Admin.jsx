@@ -1,3 +1,5 @@
+import AdminMap from "../components/AdminMap";
+
 const Admin = () => {
   const getData = async (e) => {
     e.preventDefault();
@@ -16,6 +18,14 @@ const Admin = () => {
       console.log("error recieving data", error);
     }
   };
+  //I assume i get the data;
+  const data = {
+    department : 'MCD',
+    department_id : 1,
+    tags : [1,2],
+    tags_coord : [[28.52963879308978,77.48245239257814],[28.62732258309424,77.32452392578126]]
+  }
+  
 
   return (
     <>
@@ -29,6 +39,9 @@ const Admin = () => {
         <button type="button" class="btn btn-primary btn-lg" onClick={getData}>
           Refresh
         </button>
+      </div>
+      <div style={{ width: "500px", height: "500px" }}>
+        <AdminMap data={data}/>
       </div>
     </>
   );
