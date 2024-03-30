@@ -2,6 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 import MapContainer from "../components/MapContainer";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import { departments, tags } from "../assets/variables";
 var currLoc;
 
 const Concern = () => {
@@ -10,7 +14,8 @@ const Concern = () => {
     message: "",
     address: "",
     department: "",
-    image: "",
+    tags: "",
+    image: null,
   });
 
   const { isLoggedIn } = useAuth();
@@ -55,40 +60,20 @@ const Concern = () => {
   const [mapToggle, setMapToggle] = useState(false);
   const [charCount, setCharCount] = useState(500);
 
-  const inputRef = useRef(null);
+  const [image, setImage] = useState(null);
 
-  const handleImageClick = () => {
-    inputRef.current.click();
-  };
-
-  const handleImageChange = async (event) => {
+  const handleImageChange = (event) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
-      const allowedExtensions = ["jpg", "jpeg", "png"]; // Add allowed extensions
-      const isValid = allowedExtensions.includes(
-        file.name.split(".").pop().toLowerCase()
-      );
-      if (!isValid) {
-        console.warn(
-          "Invalid file type. Please select a JPG, JPEG, or PNG file."
-        );
-        return;
+      const file = event.target.files && event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+        console.log(image);
       }
-      if (file.size > 1024 * 1024 * 5) {
-        // 5MB limit (adjust as needed)
-        console.warn(
-          "File size exceeds limit (5MB). Please select a smaller file."
-        );
-        return;
-      }
-      const base64 = await convertToBase64(file);
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        image: base64,
-      }));
-      console.log(formData);
-    } else {
-      console.warn("No file selected");
     }
   };
 
@@ -191,7 +176,7 @@ const Concern = () => {
           className="wrapper"
           style={{
             background: "#ddddde5c",
-            height: "400px",
+            maxheight: "900px",
             maxWidth: "700px",
             width: "100%",
             borderRadius: "15px",
@@ -262,6 +247,127 @@ const Concern = () => {
               />
             </div>
           </div>
+          <div>
+            <div
+              className="department-label"
+              style={{
+                color: "#ffc107",
+                marginTop: "0px",
+                marginBottom: "5px",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "7px 10px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",
+              }}
+            >
+              <i className="ri-community-fill"></i>
+              <span
+                className="department-label-content"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginLeft: "7px",
+                }}
+              >
+                Choose the department
+              </span>
+            </div>
+            <Autocomplete
+              disablePortal
+              limitTags={1}
+              id="departments"
+              options={departments}
+              onChange={(e, value) =>
+                setFormData({ ...formData, department: value.id })
+              }
+              sx={{ width: 400 }}
+              renderTags={(options) => {
+                return options.map((option) => (
+                  <Box
+                    component="li"
+                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  >
+                    <img
+                      src={option.logo}
+                      style={{
+                        height: "20px",
+                        width: "20px",
+                        marginRight: "10px",
+                      }}
+                    />
+                    {option.description}
+                  </Box>
+                ));
+              }}
+              renderOption={(props, option) => (
+                <Box
+                  component="li"
+                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                  {...props}
+                >
+                  <img
+                    src={`./departments/${option.id}.png`}
+                    style={{
+                      height: "20px",
+                      width: "20px",
+                      marginRight: "10px",
+                    }}
+                  />
+                  {option.label}
+                </Box>
+              )}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  label="Select department"
+                />
+              )}
+            />
+          </div>
+          <div>
+            <div
+              className="tag-label"
+              style={{
+                color: "#ffc107",
+                marginTop: "0px",
+                marginBottom: "5px",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "7px 10px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",
+              }}
+            >
+              <i className="ri-community-fill"></i>
+              <span
+                className="tag-label-content"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  marginLeft: "7px",
+                }}
+              >
+                Add tags
+              </span>
+            </div>
+            <Autocomplete
+              disablePortal
+              limitTags={1}
+              id="tag"
+              options={tags}
+              sx={{ width: 200 }}
+              onChange={(e, value) =>
+                setFormData({ ...formData, tag: value.id })
+              }
+              renderInput={(params) => (
+                <TextField {...params} variant="outlined" label="Choose Tags" />
+              )}
+            />
+          </div>
           <div className="Map-container">
             {mapToggle && (
               <MapContainer formData={formData} setFormData={setFormData} />
@@ -270,16 +376,11 @@ const Concern = () => {
           <div className="bottom">
             <ul className="icons">
               <li>
-                <i className="ri-image-fill" onClick={handleImageClick}></i>
                 <input
                   type="file"
-                  ref={inputRef}
-                  onClick={handleImageChange}
-                  style={{ display: "none" }}
+                  accept="image/*"
+                  onChange={handleImageChange}
                 />
-              </li>
-              <li>
-                <i className="ri-community-fill"></i>
               </li>
               <li>
                 <i
@@ -288,6 +389,16 @@ const Concern = () => {
                 ></i>
               </li>
             </ul>
+            <button
+              onClick={() =>
+                setFormData({
+                  ...formData,
+                  image: image,
+                })
+              }
+            >
+              Upload Image
+            </button>
             <div className="content">
               <span className="counter">{charCount}</span>
               <button
@@ -306,16 +417,3 @@ const Concern = () => {
 };
 
 export { Concern, currLoc };
-
-function convertToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}

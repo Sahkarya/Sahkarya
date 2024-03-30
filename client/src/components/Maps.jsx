@@ -56,7 +56,7 @@ export default function Maps(props) {
     <MapContainer
       center={locationSelection}
       zoom={12}
-      style={{ width: "425px", height: "250px" }}
+      style={{ width: "100%", height: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

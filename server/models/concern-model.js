@@ -5,6 +5,7 @@ const concernSchema = new Schema({
   message: { type: String, required: true },
   address: { type: String },
   department: { type: String },
+  tag: { type: String },
   image: { type: String },
 });
 
