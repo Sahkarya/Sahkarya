@@ -2,15 +2,25 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-const icon = L.icon({
-  iconUrl: "./placeholder.png",
-  iconSize: [38, 38],
-});
+import icons from "../assets/MapIcons";
+
 
   export default function AdminMap(props) {
     var {data} = props;
     console.log(data)
-  
+  var markers = [];
+  var tag_number =  0
+  data.tags_coord.forEach((item)=>{
+    
+    markers.push(<Marker position={item} icon={icons[data.department_id - 1][data.tags[tag_number]-1]} >
+      <Popup>
+      Location 
+      </Popup>
+      </Marker>);
+  tag_number = tag_number+1;
+  }) 
+//   indents.push(<span className='indent' key={i}></span>);
+// } 
 
   return (
     <MapContainer
@@ -23,13 +33,7 @@ const icon = L.icon({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=DLq69hXJiw2uSGwxZWRf"/>
 
-    {data.tags_coord.map((coords) =>{
-                <Marker position={coords} icon={icon}>
-        <Popup>
-          Location 
-        </Popup>
-      </Marker>
-    })}
+    {markers}
     
     </MapContainer>
   );
