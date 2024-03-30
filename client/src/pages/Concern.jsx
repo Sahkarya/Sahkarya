@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 import MapContainer from "../components/MapContainer";
@@ -8,9 +8,8 @@ import Box from "@mui/material/Box";
 import { departments, tags } from "../assets/variables";
 var currLoc;
 
-
 const Concern = () => {
-  const [ tagList, setTagList] = useState([]);
+  const [tagList, setTagList] = useState([]);
   const [formData, setFormData] = useState({
     email: "",
     message: "",
@@ -19,11 +18,7 @@ const Concern = () => {
 
     tags: "",
     image: null,
-
   });
-
-  
-  
 
   const { isLoggedIn } = useAuth();
 
@@ -290,12 +285,11 @@ const Concern = () => {
               id="departments"
               options={departments}
               onChange={(e, value) => {
-                setFormData({ ...formData, department: value });
+                setFormData({ ...formData, department: value.id });
                 var filteredTag = tags.filter(function (item) {
                   return item.department_id === value.id;
                 });
-                setTagList(filteredTag) ;
-
+                setTagList(filteredTag);
               }}
               sx={{ width: 400 }}
               renderTags={(options) => {
@@ -375,8 +369,7 @@ const Concern = () => {
               id="tag"
               options={tagList}
               sx={{ width: 200 }}
-
-              onChange={(e, value) => setFormData({ ...formData, tag: value })}
+              onChange={(e, value) => setFormData({ ...formData, tag: value.id })}
               renderInput={(params) => (
                 <TextField {...params} variant="outlined" label="Choose Tags" />
               )}
@@ -387,23 +380,35 @@ const Concern = () => {
               <MapContainer formData={formData} setFormData={setFormData} />
             )}
           </div>
-          <div className="bottom">
-            <ul className="icons">
-              <li>
-                <input
+          <div className="image-upload" >
+
+                <input style={{color: "#ffc107",
+                marginTop: "25px",
+                marginBottom: "5px",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "7px 30px 10px 0px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                transition: "background 0.2s ease",}}
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
                 />
-              </li>
-              <li>
-                <i
-                  className="ri-map-pin-fill"
-                  onClick={() => setMapToggle(!mapToggle)}
-                ></i>
-              </li>
-            </ul>
-            <button
+            <button style={{padding: '9px 18px',
+  border: 'none',
+  outline: 'none',
+  borderRadius: '50px',
+  fontSize: '16px',
+  fontWeight: '700',
+  background: '#ffc107',
+  color: 'black',
+  cursor: 'pointer',
+  opacity: '.9',
+  //pointerEvents: 'none',
+  transition: 'background 0.2s ease',
+
+            }}
               onClick={() =>
                 setFormData({
                   ...formData,
@@ -413,6 +418,18 @@ const Concern = () => {
             >
               Upload Image
             </button>
+                </div>
+             
+              
+          <div className="bottom">
+            <ul className="icons">
+              <li>
+                <i
+                  className="ri-map-pin-fill"
+                  onClick={() => setMapToggle(!mapToggle)}
+                ></i>
+              </li>
+            </ul>
             <div className="content">
               <span className="counter">{charCount}</span>
               <button
@@ -429,6 +446,5 @@ const Concern = () => {
     </>
   );
 };
-
 
 export { Concern, currLoc };
