@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect} from "react";
 import "./concern.css";
 import { useAuth } from "../store/auth";
 import MapContainer from "../components/MapContainer";
@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { departments, tags } from "../assets/variables";
 var currLoc;
 
+
 const Concern = () => {
   const [ tagList, setTagList] = useState([]);
   const [formData, setFormData] = useState({
@@ -15,9 +16,14 @@ const Concern = () => {
     message: "",
     address: "",
     department: "",
+
     tags: "",
     image: null,
+
   });
+
+  
+  
 
   const { isLoggedIn } = useAuth();
 
@@ -89,11 +95,12 @@ const Concern = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(formData);
 
     // Backend logic
     try {
-      const response = await fetch("http://localhost:5000/api/form/concern", {
+      const response = await fetch("http://localhost:80/api/form/concern", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,6 +168,7 @@ const Concern = () => {
         href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
         rel="stylesheet"
       />
+
       <div
         className="body-container"
         style={{
@@ -248,6 +256,7 @@ const Concern = () => {
               />
             </div>
           </div>
+
           <div>
             <div
               className="department-label"
@@ -286,6 +295,7 @@ const Concern = () => {
                   return item.department_id === value.id;
                 });
                 setTagList(filteredTag) ;
+
               }}
               sx={{ width: 400 }}
               renderTags={(options) => {
@@ -365,7 +375,7 @@ const Concern = () => {
               id="tag"
               options={tagList}
               sx={{ width: 200 }}
-              
+
               onChange={(e, value) => setFormData({ ...formData, tag: value })}
               renderInput={(params) => (
                 <TextField {...params} variant="outlined" label="Choose Tags" />
@@ -419,5 +429,6 @@ const Concern = () => {
     </>
   );
 };
+
 
 export { Concern, currLoc };

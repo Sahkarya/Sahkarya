@@ -12,45 +12,55 @@ const icon = L.icon({
 let locate = false;
 let tempSelectPosition = null;
 function ResetCenterView(props) {
+
+
   const { locationSelection, setLocationSelection } = props;
   const map = useMap();
-
+  
   useEffect(() => {
-    map.addEventListener("mousemove", () => {
+    map.addEventListener('mousemove', ()=>{
       var coord = map.getCenter();
-
-      setLocationSelection([coord.lat, coord.lng]);
+      
+      setLocationSelection([coord.lat,coord.lng]);
+      
     });
     const locateOptions = {
-      position: "topright",
+      position: 'topright',
       // callback before engine starts retrieving locations
-    };
+    }
+    
+    if(!locate){
 
-    if (!locate) {
       const lc = new Locate(locateOptions);
       lc.addTo(map);
       locate = true;
     }
     if (locationSelection) {
-      map.setView(L.latLng(locationSelection), map.getZoom(), {
-        animate: true,
-      });
-    }
-  }, [locationSelection]);
 
-  return null;
-}
-
-export default function Maps(props) {
+      map.setView(
+        L.latLng(locationSelection),
+        map.getZoom(),
+        {
+          animate: true
+        }
+        )
+        
+      }
+    }, [locationSelection]);
+    
+    return null;
+  }
+  
+  export default function Maps(props) {
   // const [locationSelection, setLocationSelection] = useState([28.6139,77.2090]); //coords - null value error
-  const { locationSelection, setLocationSelection, selectPosition } =
-    props.mapState;
-  useEffect(() => {
-    if (selectPosition != tempSelectPosition) {
+  const { locationSelection, setLocationSelection, selectPosition} = props.mapState;
+  useEffect(()=>{
+    if(selectPosition != tempSelectPosition){
       setLocationSelection([selectPosition?.lat, selectPosition?.lon]);
       tempSelectPosition = selectPosition;
     }
-  });
+  })
+  
 
   return (
     <MapContainer
@@ -58,19 +68,20 @@ export default function Maps(props) {
       zoom={12}
       style={{ width: "100%", height: "100%" }}
     >
+
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=DLq69hXJiw2uSGwxZWRf"
-      />
+        url="https://api.maptiler.com/maps/basic/256/{z}/{x}/{y}.png?key=DLq69hXJiw2uSGwxZWRf"/>
 
-      <Marker position={locationSelection} icon={icon}>
-        <Popup>Location</Popup>
-      </Marker>
+      
+        <Marker position={locationSelection} icon={icon}>
+          <Popup>
+            Location 
+          </Popup>
+        </Marker>
+         
+      <ResetCenterView locationSelection={locationSelection} setLocationSelection={setLocationSelection}/>
 
-      <ResetCenterView
-        locationSelection={locationSelection}
-        setLocationSelection={setLocationSelection}
-      />
     </MapContainer>
   );
 }

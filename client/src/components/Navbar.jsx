@@ -3,9 +3,11 @@ import { useEffect } from "react";
 
 const Navbar = () => {
   const customCSS = {
-    position: "abslute",
-    width: "100%",
-    height: "6.4rem",
+
+    position:"abslute",
+    width:"100%",
+    height: "10vh",
+
     fontSize: "1.6rem",
     backgroundColor: "#002447",
     color: "yellow",

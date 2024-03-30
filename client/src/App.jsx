@@ -6,12 +6,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
-import { Concern } from "./pages/Concern";
+
+import {Concern} from "./pages/Concern";
+
 import Login from "./pages/Login";
 import RegistrationForm from "./pages/Register";
 import Footer from "./components/Footer";
 import Admin from "./pages/Admin";
 import { Logout } from "./pages/Logout";
+
 
 function App() {
   return (
@@ -30,6 +33,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      
     </>
   );
 }

@@ -11,10 +11,8 @@ const departments = [
   { label: "National Highway Authority of India", id: 10 },
   { label: "Department of Education Delhi", id: 11 },
   { label: "Health & Family Welfare Delhi Government", id: 12 },
-  {
-    label: "Department of Law, Justice & Legislative Affairs, Delhi ",
-    id: 13,
-  },
+  {label: "Department of Law, Justice & Legislative Affairs, Delhi ",
+    id: 13},
 ];
 
 const tags = [
@@ -24,3 +22,4 @@ const tags = [
     { label: "Water Contamination", id: 1, department_id : 8 }
 ];
 export { departments, tags };
+
