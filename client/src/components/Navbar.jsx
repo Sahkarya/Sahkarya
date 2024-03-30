@@ -2,17 +2,6 @@ import { useAuth } from "../store/auth";
 import { useEffect } from "react";
 
 const Navbar = () => {
-  const customCSS = {
-
-    position:"abslute",
-    width:"100%",
-    height: "10vh",
-
-    fontSize: "1.6rem",
-    backgroundColor: "#002447",
-    color: "yellow",
-  };
-
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -22,66 +11,67 @@ const Navbar = () => {
     forceUpdate();
   }, [isLoggedIn]);
 
+  const navbarStyle = {
+    background: "linear-gradient(to right, #1e5799, #2989d8, #7db9e8)",
+  };
+
+  const blackFont = {
+    color: "black",
+  };
+
   return (
-    <>
-      <div>
-        <nav className="navbar navbar-expand-lg" style={customCSS}>
-          <div className="container-fluid">
-            <a
-              className="navbar-brand"
-              href="/"
-              style={{ fontSize: "2.6rem", color: "white" }}
-            >
-              Sahkarya
+    <nav className="navbar navbar-expand-lg navbar-dark" style={navbarStyle}>
+      <div className="container-fluid">
+        <a
+          className="navbar-brand"
+          href="/"
+          style={{ fontSize: "2.6rem", color: "black" }}
+        >
+          Sahkarya
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav ms-auto">
+            <a className="nav-link" href="/explore" style={blackFont}>
+              Explore
             </a>
-
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                <a
-                  className="nav-link"
-                  href="/explore"
-                  style={{ color: "white" }}
-                >
-                  Explore
-                </a>
-                <a
-                  className="nav-link"
-                  href="/about"
-                  style={{ color: "white" }}
-                >
-                  About Us
-                </a>
-                <a
-                  className="nav-link"
-                  href="/concern"
-                  style={{ color: "#ffc107" }}
-                >
-                  Raise a Concern
-                </a>
-
-                {isLoggedIn ? (
-                  <a
-                    className="nav-link"
-                    href="/logout"
-                    style={{ color: "white" }}
-                  >
-                    Logout
-                  </a>
-                ) : (
-                  <a
-                    className="nav-link"
-                    href="/login"
-                    style={{ color: "white" }}
-                  >
-                    Login
-                  </a>
-                )}
-              </div>
-            </div>
+            <a className="nav-link" href="/about" style={blackFont}>
+              About Us
+            </a>
+            <a
+              className="nav-link"
+              href="/concern"
+              style={{
+                color: "black",
+                backgroundColor: "#ffc107",
+                borderRadius: "1rem",
+              }}
+            >
+              Raise a Concern
+            </a>
+            {isLoggedIn ? (
+              <a className="nav-link" href="/logout" style={blackFont}>
+                Logout
+              </a>
+            ) : (
+              <a className="nav-link" href="/login" style={blackFont}>
+                Login
+              </a>
+            )}
           </div>
-        </nav>
+        </div>
       </div>
-    </>
+    </nav>
   );
 };
 
