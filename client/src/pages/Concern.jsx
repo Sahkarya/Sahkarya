@@ -9,6 +9,7 @@ import { departments, tags } from "../assets/variables";
 var currLoc;
 
 const Concern = () => {
+  const [ tagList, setTagList] = useState([]);
   const [formData, setFormData] = useState({
     email: "",
     message: "",
@@ -279,9 +280,13 @@ const Concern = () => {
               limitTags={1}
               id="departments"
               options={departments}
-              onChange={(e, value) =>
-                setFormData({ ...formData, department: value.id })
-              }
+              onChange={(e, value) => {
+                setFormData({ ...formData, department: value });
+                var filteredTag = tags.filter(function (item) {
+                  return item.department_id === value.id;
+                });
+                setTagList(filteredTag) ;
+              }}
               sx={{ width: 400 }}
               renderTags={(options) => {
                 return options.map((option) => (
@@ -358,11 +363,10 @@ const Concern = () => {
               disablePortal
               limitTags={1}
               id="tag"
-              options={tags}
+              options={tagList}
               sx={{ width: 200 }}
-              onChange={(e, value) =>
-                setFormData({ ...formData, tag: value.id })
-              }
+              
+              onChange={(e, value) => setFormData({ ...formData, tag: value })}
               renderInput={(params) => (
                 <TextField {...params} variant="outlined" label="Choose Tags" />
               )}
