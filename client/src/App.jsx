@@ -2,7 +2,14 @@ import "./App.css";
 import Home from "./pages/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Outlet,
+  Route,
+  RouterProvider
+} from "react-router-dom";
+import { BrowserRouter, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
@@ -12,27 +19,33 @@ import {Concern} from "./pages/Concern";
 import Login from "./pages/Login";
 import RegistrationForm from "./pages/Register";
 import Footer from "./components/Footer";
-import Admin from "./pages/Admin";
+import {Admin} from "./pages/Admin";
 import { Logout } from "./pages/Logout";
+import { adminLoader } from "./pages/Admin";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+    
+<Route path="/" element={<Home />} />
+<Route path="/explore" element={<Explore />} />
+<Route path="/about" element={<About />} />
+<Route path="/concern" element={<Concern />} />
+<Route path="/register" element={<RegistrationForm />} />
+<Route path="/login" element={<Login />} />
+<Route path="/admin" element={<Admin />} loader={adminLoader} />
+<Route path="/logout" element={<Logout />} />
+</>
+  )
+)
 
 function App() {
   return (
     <>
-      <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/concern" element={<Concern />} />
-          <Route path="/register" element={<RegistrationForm />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/logout" element={<Logout />} />
-        </Routes>
+        <RouterProvider router={router} />
+        
         <Footer />
-      </BrowserRouter>
       
     </>
   );

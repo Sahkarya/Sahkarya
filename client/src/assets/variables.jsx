@@ -19,6 +19,8 @@ const tags = [
   { label: "Toll Tax", id: 1, department_id: 1 },
     { label: "Land and Estate", id: 2 , department_id :1},
     { label: "Hospital Administration", id: 3, department_id :1 },
+    { label: "Waste/Garbage", id: 4, department_id :1 },
+    { label: "Other", id: 5, department_id :1 },
     { label: "Water Contamination", id: 1, department_id : 8 }
 ];
 export { departments, tags };
