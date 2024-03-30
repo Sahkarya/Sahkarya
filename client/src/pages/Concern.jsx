@@ -172,6 +172,7 @@ const Concern = () => {
           justifyContent: "center",
           minHeight: "100vh",
           backgroundColor: "#fff",
+          backgroundImage: "url('image6.jpeg')",
         }}
       >
         {" "}
@@ -179,13 +180,13 @@ const Concern = () => {
         <div
           className="wrapper"
           style={{
-            background: "#ddddde5c",
-            maxheight: "900px",
+            background: "rgba(221, 221, 222, 0.95)", // Adjust the alpha value (0.9 in this case) for transparency
+            maxHeight: "900px", // Corrected capitalization of maxHeight
             maxWidth: "700px",
             width: "100%",
             borderRadius: "15px",
             padding: "25px 25px 15px 25px",
-            boxShadow: "0px 10px 15px 10px rgba(0,0,0,0.1)",
+            boxShadow: "0px 10px 15px 10px rgba(0, 0, 0, 0.1)",
           }}
         >
           <div
@@ -369,7 +370,9 @@ const Concern = () => {
               id="tag"
               options={tagList}
               sx={{ width: 200 }}
-              onChange={(e, value) => setFormData({ ...formData, tag: value.id })}
+              onChange={(e, value) =>
+                setFormData({ ...formData, tag: value.id })
+              }
               renderInput={(params) => (
                 <TextField {...params} variant="outlined" label="Choose Tags" />
               )}
@@ -380,9 +383,10 @@ const Concern = () => {
               <MapContainer formData={formData} setFormData={setFormData} />
             )}
           </div>
-          <div className="image-upload" >
-
-                <input style={{color: "#ffc107",
+          <div className="image-upload">
+            <input
+              style={{
+                color: "#ffc107",
                 marginTop: "25px",
                 marginBottom: "5px",
                 display: "inline-flex",
@@ -390,25 +394,27 @@ const Concern = () => {
                 padding: "7px 30px 10px 0px",
                 borderRadius: "50px",
                 cursor: "pointer",
-                transition: "background 0.2s ease",}}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-            <button style={{padding: '9px 18px',
-  border: 'none',
-  outline: 'none',
-  borderRadius: '50px',
-  fontSize: '16px',
-  fontWeight: '700',
-  background: '#ffc107',
-  color: 'black',
-  cursor: 'pointer',
-  opacity: '.9',
-  //pointerEvents: 'none',
-  transition: 'background 0.2s ease',
-
-            }}
+                transition: "background 0.2s ease",
+              }}
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <button
+              style={{
+                padding: "9px 18px",
+                border: "none",
+                outline: "none",
+                borderRadius: "50px",
+                fontSize: "16px",
+                fontWeight: "700",
+                background: "#ffc107",
+                color: "black",
+                cursor: "pointer",
+                opacity: ".9",
+                //pointerEvents: 'none',
+                transition: "background 0.2s ease",
+              }}
               onClick={() =>
                 setFormData({
                   ...formData,
@@ -418,9 +424,8 @@ const Concern = () => {
             >
               Upload Image
             </button>
-                </div>
-             
-              
+          </div>
+
           <div className="bottom">
             <ul className="icons">
               <li>

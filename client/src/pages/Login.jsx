@@ -48,7 +48,13 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: "URL('image8.jpeg')",
+        backgroundSize: "cover",
+        height: "50rem",
+      }}
+    >
       <h2
         style={{
           color: "rgb(0, 36, 71)",
@@ -65,9 +71,11 @@ const Login = () => {
       <form
         onSubmit={handleSubmit}
         style={{
+          background: "rgba(221, 221, 222, 0.5)",
           display: "grid",
           justifyContent: "center",
           paddingLeft: "20px",
+          height: "30rem",
         }}
       >
         <label
@@ -141,28 +149,33 @@ const Login = () => {
         >
           Log In
         </button>
-      </form>
-      <div
-        style={{
-          display: "flex",
-          marginTop: "2.4rem",
-          justifyContent: "center",
-          fontWeight: "400",
-          fontSize: "1.2rem",
-        }}
-      >
-        <p
-          style={{ width: "20rem", padding: ".5em", border: "1px solid #ccc" }}
+
+        <div
+          style={{
+            display: "flex",
+            marginTop: "2.4rem",
+            justifyContent: "center",
+            fontWeight: "400",
+            fontSize: "1.2rem",
+          }}
         >
-          Don't have an account?
-          <a
-            href="/register"
-            style={{ textDecoration: "none", marginLeft: ".5rem" }}
+          <p
+            style={{
+              width: "20rem",
+              padding: ".5em",
+              border: "1px solid #ccc",
+            }}
           >
-            Sign Up
-          </a>
-        </p>
-      </div>
+            Don't have an account?
+            <a
+              href="/register"
+              style={{ textDecoration: "none", marginLeft: ".5rem" }}
+            >
+              Sign Up
+            </a>
+          </p>
+        </div>
+      </form>
     </div>
   );
 };

@@ -1,6 +1,4 @@
-
 import React, { useState } from "react";
-
 
 const About = () => {
   return (
@@ -78,8 +76,14 @@ const About = () => {
 
       <style jsx>{`
         .about-page {
+          background-image: url("image7.jpeg");
+        }
+
+        .content {
+          font-size: 1.2rem;
           max-width: 60%;
           margin: 0 auto;
+          background: rgba(221, 221, 222, 0.7);
         }
 
         h1,

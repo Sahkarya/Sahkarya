@@ -12,10 +12,10 @@ const Home = () => {
       >
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img src="image1.png" className="d-block w-100" alt="..." />
+            <img src="image3.png" className="d-block w-100" alt="..." />
           </div>
           <div className="carousel-item">
-            <img src="image2.png" className="d-block w-100" alt="..." />
+            <img src="image4.jpeg" className="d-block w-100" alt="..." />
           </div>
         </div>
         <button

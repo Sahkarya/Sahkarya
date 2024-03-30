@@ -51,7 +51,9 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundImage: "URl('image8.jpeg')", backgroundSize: "cover" }}
+    >
       <h2
         style={{
           color: "rgb(0, 36, 71)",
@@ -71,6 +73,7 @@ const RegistrationForm = () => {
           display: "grid",
           justifyContent: "center",
           paddingLeft: "20px",
+          background: "rgba(221, 221, 222, 0.5)",
         }}
       >
         <label
