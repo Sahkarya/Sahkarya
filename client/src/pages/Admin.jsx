@@ -13,6 +13,7 @@ const Admin = () => {
         const data = await response.json();
         alert("Seccessfull ");
         console.log(data);
+        console.log(data.msg);
       }
     } catch (error) {
       console.log("error recieving data", error);
@@ -20,12 +21,14 @@ const Admin = () => {
   };
   //I assume i get the data;
   const data = {
-    department : 'MCD',
-    department_id : 1,
-    tags : [1,2],
-    tags_coord : [[28.52963879308978,77.48245239257814],[28.62732258309424,77.32452392578126]]
-  }
-  
+    department: "MCD",
+    department_id: 1,
+    tags: [1, 2],
+    tags_coord: [
+      [28.52963879308978, 77.48245239257814],
+      [28.62732258309424, 77.32452392578126],
+    ],
+  };
 
   return (
     <>
@@ -41,7 +44,7 @@ const Admin = () => {
         </button>
       </div>
       <div style={{ width: "500px", height: "500px" }}>
-        <AdminMap data={data}/>
+        <AdminMap data={data} />
       </div>
     </>
   );
