@@ -21,7 +21,6 @@ function ResetCenterView(props) {
 export default function AdminMap(props) {
   const { MapCenter, setMapCenter } = props.mapProps;
   const data = props.markerData;
-  console.log(data);
   var markers = [];
   var tag_number = 0;
 
@@ -42,7 +41,12 @@ export default function AdminMap(props) {
     <MapContainer
       center={MapCenter}
       zoom={12}
-      style={{ width: "100%", height: "100%" }}
+      style={{
+        width: "100%",
+        height: "100%",
+        borderRadius: "20px",
+        border: "px solid",
+      }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

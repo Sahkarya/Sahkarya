@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./admin.css";
 import AdminMap from "../components/Admin/AdminMap";
 import SearchBar from "../components/Admin/SearchBar";
 import Grid from "@mui/material/Grid";
@@ -11,11 +12,11 @@ import ConcernPost from "../components/Admin/ConcernPost";
 import { Autocomplete } from "@mui/material";
 import { marker } from "leaflet";
 import { tags } from "../assets/variables";
+
 const Admin = () => {
   const [MapCenter, setMapCenter] = useState([28.7041, 77.1025]);
   const department_id = 1;
   const data = useLoaderData();
-  console.log(data);
   //I assume i get the data;
   const markerData = {
     department_id: null,
@@ -50,93 +51,46 @@ const Admin = () => {
   }
   return (
     <>
-      <Grid container spacing={0} padding={2} maxHeight={750}>
-        <Grid
-          item
-          xs={8}
-          padding={0}
-          sx={{
-            padding: "25px 25px 0px 25px",
-            maxWidth: "1000px",
-          }}
-        >
-          <SearchBar mapProps={MapProps}></SearchBar>
-        </Grid>
-        <Grid item xs={4} sx={{}}>
-          <Autocomplete
-            disablePortal
-            limitTags={1}
-            id="tag"
-            options={markerData.tags_label}
-            sx={{ width: "300px", padding: "25px 25px 0px 25px" }}
-            // onChange={(e, value) => setFormData({ ...formData, tag: value.id })}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Filter Tag"
-                size="small"
-              />
-            )}
-          />
-        </Grid>
-      </Grid>
+      <div className="gridContainer">
+        <div className="leftPanel">
+          <div className="leftPanel-bg">
+            <div className="panelTop">
+              <img src="./adminIcons/icon_1_2.png" alt="" className="logo" />
+              <hr className="panelLine" />
+            </div>
+            <div className="panelMid">
+              <button className="panelButton">
+                <img
+                  className="iconTagList"
+                  src="./adminIcons/icon_1_2.png"
+                ></img>
+              </button>
+              <button className="panelButton">
+                <img
+                  className="iconTagList"
+                  src="./adminIcons/icon_1_2.png"
+                ></img>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="rightContainer">
+          <div className="upperPanel">
+            <div className="searchBar">
+              <SearchBar mapProps={MapProps}></SearchBar>
+            </div>
+            <div className="userIcon"></div>
+          </div>
 
-      <div>
-        <Grid container spacing={0} padding={2} maxHeight={750}>
-          <Grid
-            item
-            xs={8}
-            padding={0}
-            maxHeight={750}
-            sx={{
-              border: "2px solid grey",
-              borderTopLeftRadius: "10px",
-              borderBottomLeftRadius: "10px",
-            }}
-          >
-            <div style={{ width: "100%", height: "100%" }}>
-              <AdminMap markerData={markerData} mapProps={MapProps} />
+          <div className="card-map">
+            <div className="cardList">{concernList}</div>
+            <div className="mapContainer">
+              <div style={{ width: "100%", height: "100%" }}>
+                <AdminMap markerData={markerData} mapProps={MapProps} />
+              </div>
             </div>
-          </Grid>
-          <Grid
-            item
-            xs={4}
-            maxHeight={750}
-            sx={{
-              border: "2px solid grey",
-              borderTopRightRadius: "10px",
-              borderBottomRightRadius: "10px",
-            }}
-          >
-            <div style={{ height: "70px" }}>
-              <Box
-                display="flex"
-                sx={{
-                  border: "2px solid grey",
-                  padding: "0px 5px 5px 0px",
-
-                  margin: "10px",
-                  fontSize: "28px",
-                  backgroundColor: "#ffc107",
-                  borderRadius: "15px",
-                }}
-                alignItems="center"
-                justifyContent="center"
-                minHeight={70}
-                maxHeight={200}
-              >
-                Raised Concerns
-              </Box>
-            </div>
-            <hr style={{ margin: "10px 0px 0px 0px" }} />
-            <div>
-              <List style={{ maxHeight: "638px", overflow: "auto" }}>
-                {concernList}
-              </List>
-            </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -57,7 +57,11 @@ export default function SearchBar(props) {
           />
         </div>
         <div
-          style={{ display: "flex", alignItems: "center", padding: "0px 20px" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            padding: "0px 0px 0px 10px",
+          }}
         >
           <button
             style={{
@@ -80,11 +84,16 @@ export default function SearchBar(props) {
         </div>
       </div>
       <div id="addressList">
-        <List component="nav" aria-label="main mailbox folders">
+        <List
+          component="nav"
+          aria-label="main mailbox folders"
+          sx={{ backgroundColor: "#FFFFFF", border: "2px solid black" }}
+        >
           {SearchResult.map((item) => {
             return (
               <div key={item?.place_id}>
                 <ListItem
+                  sx={{ backgroundColor: "#FFFFFF", border: "2px solid black" }}
                   button
                   onClick={() => {
                     setSearchText(item?.display_name);
