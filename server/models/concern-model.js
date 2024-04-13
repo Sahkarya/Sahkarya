@@ -7,6 +7,7 @@ const concernSchema = new Schema({
   department: { type: String, required: true },
   tag: { type: String, required: true },
   image: { type: String },
+  date: { type: Date },
 });
 
 const ConcernModel = new model("ConcernModel", concernSchema);

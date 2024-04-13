@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import { Admin } from "./pages/Admin";
 import { Logout } from "./pages/Logout";
 import { adminLoader } from "./pages/Admin";
+import UserProfile from "./pages/UserProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/admin" element={<Admin />} loader={adminLoader} />
       <Route path="/logout" element={<Logout />} />
+      <Route path="/profile" element={<UserProfile />} />
     </>
   )
 );
