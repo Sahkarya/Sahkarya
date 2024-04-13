@@ -1,4 +1,3 @@
-
 import { tags } from "../../assets/variables";
 import { useState } from "react";
 import Box from "@mui/material/Box";
@@ -38,10 +37,10 @@ function ImageModal(props) {
         aria-describedby="child-modal-description"
       >
         <Box sx={{ ...style, width: 'fit-content' }}>
-        <img src={image} alt="No image uploaded"/>
+        <img src={image} alt="" />
         <img
                 src="./crossIcon.png"
-                
+                alt=""
                 className="viewMore"
                 onClick={handleClose}
               />
@@ -114,7 +113,6 @@ const params = {
       break;
     }
   }
-
   var itemDate = new Date(item.date);
   var currDate = new Date();
 
@@ -180,5 +178,3 @@ const params = {
     </>
   );
 }
-
-

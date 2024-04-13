@@ -64,6 +64,10 @@ background: #e5eaf5;
     width: 36px;
     height: 36px;
 }
+.panelButton:hover{
+    
+    background-color: lightblue;
+}
 .searchBar{
     margin-left: 35px;
     margin-top:26px;
@@ -176,7 +180,8 @@ top: 10px;
     position: absolute;
 width: 43px;
 height: 43px;
-left: 440px;
+right: 7px;
+
 bottom: 7px;
 }
 .mapContainer{

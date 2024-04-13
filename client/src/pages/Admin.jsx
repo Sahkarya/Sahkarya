@@ -15,20 +15,52 @@ import { tags } from "../assets/variables";
 
 const Admin = () => {
   const [MapCenter, setMapCenter] = useState([28.7041, 77.1025]);
+  const [tagToggle, setTagToggle] = useState(false);
+  
   const department_id = 1;
   const data = useLoaderData();
-  //I assume i get the data;
+  console.log(data);
+  const[concernData, setConcernData] = useState(data.msg);
+  var allTag = { label: "All", id: 0, department_id: 0 };
+  
+  var filteredTag = tags.filter(function (item) {
+    return item.department_id === department_id;
+  });
+  filteredTag.push(allTag);
+  
+  console.log(filteredTag);
   const markerData = {
     department_id: null,
     tags: [],
     tags_coord: [],
     tags_label: [],
   };
-
+  const [chosenTag, setChosenTag] = useState(0);
+  
+  console.log(chosenTag)
   const MapProps = { MapCenter, setMapCenter };
   var concernList = [];
   markerData.department_id = department_id;
-  data.msg.forEach((item) => {
+  const handleTagChange = (value)=>{
+    setChosenTag(value)
+    if( value == 0){
+      setConcernData(data.msg);
+    }
+    else{
+
+      setConcernData(getTagData(value));
+    }
+    
+  }
+  const getTagData = (tag_id)=>{
+    var result= data.msg.filter(function (item) {
+      
+      return item.tag == tag_id;
+    });
+    return result;
+  }
+  concernData.forEach((item) => {
+
     if (item.department == 1) {
       markerData.tags.push(item.tag);
       markerData.tags_coord.push([
@@ -48,6 +80,7 @@ const Admin = () => {
         break;
       }
     }
+
   }
   return (
     <>
@@ -59,12 +92,27 @@ const Admin = () => {
               <hr className="panelLine" />
             </div>
             <div className="panelMid">
-              <button className="panelButton">
+            <button className="panelButton" onClick={() => setTagToggle(!tagToggle)}>
                 <img
                   className="iconTagList"
-                  src="./adminIcons/icon_1_2.png"
+                  src="./tagIcon.png"
                 ></img>
               </button>
+              <div>
+              { tagToggle && (<Autocomplete
+              disablePortal
+              limitTags={1}
+              id="tag"
+              options={filteredTag}
+              onChange={(e, value) => {
+                handleTagChange(value.id);
+              }}
+              
+              renderInput={(params) => (
+                <TextField {...params} variant="outlined" label="Choose Tag" />
+              )}
+            />)}
+              </div>
               <button className="panelButton">
                 <img
                   className="iconTagList"
@@ -98,8 +146,9 @@ const Admin = () => {
 
 export const adminLoader = async (e) => {
   var data;
+  console.log('heelo')
   try {
-    const response = await fetch("http://localhost:80/api/data/admin", {
+    const response = await fetch("http://localhost:80/api/data/admin?dep_id=1&tag=0&status=false", {
       method: "GET",
     });
     if (response.ok) {
@@ -108,6 +157,7 @@ export const adminLoader = async (e) => {
   } catch (error) {
     console.log("error recieving data", error);
   }
+  
   return data;
 };
 export { Admin };

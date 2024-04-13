@@ -2,7 +2,16 @@ const ConcernModel = require("../models/concern-model");
 
 const AdminData = async (req, res) => {
   try {
-    const response = await ConcernModel.find();
+    console.log(req.query.dep_id)
+    console.log('jhelo')
+    let response;
+    if(req.query.tag == 0){
+      response = await ConcernModel.find({$and:[{department : req.query.dep_id}, {status : req.query.status}]});
+      console.log(response)
+    }
+    else{
+      response = await ConcernModel.find({$and:[{department : req.query.dep_id}, {status : req.query.status}, {tag : req.query.tag}]});
+    }
     if (!response) {
       res.status(404).json({ msg: "No Data Found" });
       return;

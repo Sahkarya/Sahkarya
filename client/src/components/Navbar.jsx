@@ -11,6 +11,10 @@ const Navbar = () => {
     forceUpdate();
   }, [isLoggedIn]);
 
+  var WithoutNavbarRoute = "/admin";
+  if(WithoutNavbarRoute == window.location.pathname){
+    return null;
+  }
   const navbarStyle = {
     background: "linear-gradient(to right, #1e5799, #2989d8, #7db9e8)",
   };

@@ -5,7 +5,7 @@ const concernRoute = require("./routers/concern-router");
 const authRoute = require("./routers/auth-router");
 const cors = require("cors");
 const dataRoute = require("./routers/data-router");
-
+const dbRoute = require("./routers/db-router")
 const app = express();
 app.use(express.json());
 
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 app.use("/api/form", concernRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/data", dataRoute);
-
+app.use("/api/db",dbRoute);
 const PORT = 80;
 connectDB().then(() => {
   app.listen(PORT, () => {
