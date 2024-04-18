@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import ModalMap from "./ModalMap";
+import { departments } from "../../assets/variables";
 const style = {
   position: "absolute",
   top: "50%",
@@ -59,7 +60,8 @@ export default function ConcernPost(props) {
   const handleClose = () => setOpen(false);
   const [address, setAddress] = useState();
   const { item } = props;
-  const handleStatus = () => {
+  const handleStatus = (status_tag) => {
+    console.log(status_tag) //will use this later to set status as pending
     var result = confirm('This will change the status of concern to "Solved" and send email to the Concern Raiser' )
     if (result){
       console.log(item._id)
@@ -72,9 +74,20 @@ export default function ConcernPost(props) {
       } catch (error) {
         console.log("error recieving data", error);
       }
+      
+      try {
+        const dep_name = departments[item.department-1].label
+        fetch(`http://localhost:80/api/email/send?r=${item.email}&c=${item.message}&d=${dep_name}`, {
+          method: "POST",
+        }).then(res => {
+          console.log("Request complete! response:", res.status);});
+        
+      } catch (error) {
+        console.log("error recieving data", error);
+      }
     }
     handleClose();
-
+    window.location.reload();
   };
   var markerData = {
     department: item.department,
@@ -151,9 +164,18 @@ const params = {
   height: '33px',
   left: '150px',
   top: '10px',
-  backgroundColor: '#ff3333',
-  border: '2px solid grey',
-  borderRadius: '10px',}} onClick={handleStatus} >Change Status</button>
+  backgroundColor: '#5ec15d',
+  boxShadow: '2px',
+  borderRadius: '10px',}} onClick={()=>handleStatus(1)} >Mark Solved</button>
+  <button className="Status" style={{position: 'absolute',
+  width: 'fit-content',
+  padding: '3px 5px 5px 5px',
+  height: '33px',
+  left: '270px',
+  top: '10px',
+  backgroundColor: '#ffff00',
+  
+  borderRadius: '10px',}} onClick={()=>handleStatus(2)} >Mark Read</button>
             <img
                 src="./crossIcon.png"
                 alt=""
