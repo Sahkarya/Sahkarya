@@ -116,10 +116,28 @@ const Admin = () => {
               <button className="panelButton">
                 <img
                   className="iconTagList"
-                  src="./adminIcons/icon_1_2.png"
+                  src="./pendingIcon.png"
+                ></img>
+              </button>
+              <button className="panelButton">
+                <img
+                  className="iconTagList"
+                  src="./dustbinIcon.png"
+                ></img>
+              </button>
+              <button className="panelButton">
+                <img
+                  className="iconTagList"
+                  src="./pipelineIcon.png"
                 ></img>
               </button>
             </div>
+            <button className="panelButton">
+                <img
+                  className="iconTagList"
+                  src="./settingIcon.png"
+                ></img>
+              </button>
           </div>
         </div>
         <div className="rightContainer">
