@@ -51,15 +51,17 @@ const RegistrationForm = () => {
   };
 
   return (
+    <>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <div
-      style={{ backgroundImage: "URl('image8.jpeg')", backgroundSize: "cover" }}
+      style={{ backgroundImage: "URl('image8.jpeg')", backgroundSize: "cover", height:"50rem" }}
     >
       <h2
         style={{
           color: "rgb(0, 36, 71)",
           width: "100%",
           display: "grid",
-          marginTop: "30px",
+          paddingTop: "20px",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: "600",
@@ -209,6 +211,7 @@ const RegistrationForm = () => {
         />
 
         <button
+        id="btnn1"
           type="submit"
           style={{
             fontWeight: "500",
@@ -227,7 +230,13 @@ const RegistrationForm = () => {
           Sign Up
         </button>
       </form>
+      <style jsx>{`
+      #btnn1:hover{
+        color: white;
+      }
+      `}</style>
     </div>
+    </>
   );
 };
 

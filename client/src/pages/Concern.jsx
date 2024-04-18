@@ -173,6 +173,8 @@ const Concern = () => {
           minHeight: "100vh",
           backgroundColor: "#fff",
           backgroundImage: "url('image6.jpeg')",
+          paddingTop: "20px",
+          paddingBottom: "20px",
         }}
       >
         {" "}
@@ -181,7 +183,7 @@ const Concern = () => {
           className="wrapper"
           style={{
             background: "rgba(221, 221, 222, 0.95)", // Adjust the alpha value (0.9 in this case) for transparency
-            maxHeight: "900px", // Corrected capitalization of maxHeight
+            maxHeight: "1100px", // Corrected capitalization of maxHeight
             maxWidth: "700px",
             width: "100%",
             borderRadius: "15px",
@@ -378,11 +380,6 @@ const Concern = () => {
               )}
             />
           </div>
-          <div className="Map-container">
-            {mapToggle && (
-              <MapContainer formData={formData} setFormData={setFormData} />
-            )}
-          </div>
           <div className="image-upload">
             <input
               style={{
@@ -392,7 +389,7 @@ const Concern = () => {
                 display: "inline-flex",
                 alignItems: "center",
                 padding: "7px 30px 10px 0px",
-                borderRadius: "50px",
+                // borderRadius: "50px",
                 cursor: "pointer",
                 transition: "background 0.2s ease",
               }}
@@ -424,6 +421,11 @@ const Concern = () => {
             >
               Upload Image
             </button>
+          </div>
+          <div className="Map-container">
+            {mapToggle && (
+              <MapContainer formData={formData} setFormData={setFormData} />
+            )}
           </div>
 
           <div className="bottom">

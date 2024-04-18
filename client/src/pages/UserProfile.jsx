@@ -35,24 +35,54 @@ const UserProfile = () => {
   } else {
     return (
       <>
-        <h1>Hello {user.name}🤗</h1>
-        <div className="userProfileContainer">
-          <div className="sidebar">
-            <h2>User Actions</h2>
-            <a href="">Edit Profile 📝</a>
-            <a href="">Change Password ✍️</a>
-            <a href="/concern">Raise New Concern 🫣</a>
+        <div id="body">
+          <div id="background1">
+            <div id="img1">
+              <img src="profile.png" alt="don't show" />
+            </div>
+            <div id="heading1">
+              <h1>Hey, {user.name}</h1>
+            </div>
+            <div id="email">
+              {user.email}
+              <i
+                class="ri-verified-badge-line"
+                style={{ color: "blueviolet" }}
+              ></i>
+            </div>
           </div>
-          <div className="content">
-            <h1>Your Concern History</h1>
-            {userData?.msg?.map((message) => (
-              <div key={message._id} className="concernCard">
-                <p>Status: {message.status.toString()}</p>
-                <p>Email: {message.email}</p>
-                <p>Message: {message.message}</p>
-                <p>Address: {message.address}</p>
+          <div className="userProfileContainer">
+            <div id="sidebar">
+              <h2>User Actions</h2>
+              <div id="edit">
+                <a href="">
+                <i class="ri-edit-box-line"></i>Edit Profile
+                </a>
               </div>
-            ))}
+              <div id="change-password">
+                <a href="">
+                   <i class="ri-lock-password-line"></i> Change Password
+                </a>
+              </div>
+              <div id="new-concern">
+                <a href="/concern">
+                 <i class="ri-questionnaire-line"></i>  Raise New Concern
+                </a>
+              </div>
+            </div>
+            <div id="content">
+              <div id="content1">
+              <h1>Your Concern History</h1>
+              </div>
+              {userData?.msg?.map((message) => (
+                <div key={message._id} id="concernCard">
+                  <p>Status: {message.status.toString()}</p>
+                  <p>Email: {message.email}</p>
+                  <p>Message: {message.message}</p>
+                  <p>Address: {message.address}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </>

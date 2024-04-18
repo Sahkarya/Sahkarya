@@ -61,6 +61,7 @@ const About = () => {
           touch with us today to learn more about our solutions and how we can
           help you tackle dustbin overflow and trash issues in your area.
         </p>
+       
         <div
           style={{
             display: "flex",
@@ -71,6 +72,16 @@ const About = () => {
           <p className="end-note">
             Together, let's build a brighter tomorrow, one bin at a time.
           </p>
+          <button id='btn1' style={{
+              border: "none",
+              backgroundColor: "#ffc107",
+              borderRadius: "10px",
+              fontWeight: "600",
+              height: "35px",
+              marginRight:"10px"
+            }}>
+              Join Us
+            </button>
         </div>
       </div>
 
@@ -117,6 +128,9 @@ const About = () => {
         .end-note:hover {
           background-color: #2980b9;
           color: #ffffff;
+        }
+        #btn1:hover{
+          color: white;
         }
       `}</style>
     </div>

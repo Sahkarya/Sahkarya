@@ -49,6 +49,7 @@ const Login = () => {
 
   return (
     <div
+   
       style={{
         backgroundImage: "URL('image8.jpeg')",
         backgroundSize: "cover",
@@ -60,10 +61,11 @@ const Login = () => {
           color: "rgb(0, 36, 71)",
           width: "100%",
           display: "grid",
-          marginTop: "50px",
+          // marginTop: "50px",
           alignItems: "center",
           justifyContent: "center",
           fontWeight: "600",
+          paddingTop:"20px"
         }}
       >
         Login Form
@@ -133,6 +135,7 @@ const Login = () => {
         />
 
         <button
+          class="btnn"
           type="submit"
           style={{
             fontWeight: "500",
@@ -176,7 +179,13 @@ const Login = () => {
           </p>
         </div>
       </form>
+      <style jsx>{`
+      .btnn:hover{
+        color: white;
+      }
+      `}</style>
     </div>
+    
   );
 };
 

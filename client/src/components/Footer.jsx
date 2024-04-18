@@ -3,9 +3,11 @@ import React from "react";
 const Footer = () => {
   return (
     <>
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    
       <footer
         className="footer"
-        style={{ position: "inherit", bottom: "0", width: "100%" }}
+        style={{ position: "bottom", bottom: "0", width: "100%" }}
       >
         <p style={{ color: "white" }}>
           &copy; 2024 Sahkarya. All rights reserved.
@@ -16,6 +18,7 @@ const Footer = () => {
           <i class="ri-code-box-fill" style={{ marginRight: "20px" }}></i>
         </div>
       </footer>
+      
     </>
   );
 };

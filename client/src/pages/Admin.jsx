@@ -125,9 +125,15 @@ const Admin = () => {
         <div className="rightContainer">
           <div className="upperPanel">
             <div className="searchBar">
-              <SearchBar mapProps={MapProps}></SearchBar>
+              <SearchBar  mapProps={MapProps}></SearchBar>
+           
+            <div className="userIcon">
+              <a href="./profile" target="blank">
+              <i class="ri-user-fill"></i>
+
+              </a>
             </div>
-            <div className="userIcon"></div>
+            </div>
           </div>
 
           <div className="card-map">
