@@ -10,6 +10,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { BrowserRouter, Routes } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Explore from "./pages/Explore";
 import About from "./pages/About";
@@ -21,11 +22,12 @@ import { Admin } from "./pages/Admin";
 import { Logout } from "./pages/Logout";
 import { adminLoader } from "./pages/Admin";
 import UserProfile from "./pages/UserProfile";
-
+import FirePage from "./pages/FirePage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Home />} />
+      <Route path="/fire" element={<FirePage />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/about" element={<About />} />
       <Route path="/concern" element={<Concern />} />

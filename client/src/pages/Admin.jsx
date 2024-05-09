@@ -2,21 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./admin.css";
 import AdminMap from "../components/Admin/AdminMap";
 import SearchBar from "../components/Admin/SearchBar";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import List from "@mui/material/List";
-import { Paper } from "@material-ui/core";
 import { useLoaderData } from "react-router-dom";
 import ConcernPost from "../components/Admin/ConcernPost";
 import { Autocomplete } from "@mui/material";
-import { marker } from "leaflet";
 import { tags } from "../assets/variables";
-
+import { useNavigate } from "react-router-dom";
 const Admin = () => {
   const [MapCenter, setMapCenter] = useState([28.7041, 77.1025]);
   const [tagToggle, setTagToggle] = useState(false);
-  
+  let navigator = useNavigate()
   const department_id = 1;
   const data = useLoaderData();
   console.log(data);
@@ -117,6 +112,12 @@ const Admin = () => {
                 <img
                   className="iconTagList"
                   src="./pendingIcon.png"
+                ></img>
+              </button>
+              <button className="panelButton" onClick={()=>navigator('/fire')}>
+                <img
+                  className="iconTagList"
+                  src="./fireButtonIcon.png"
                 ></img>
               </button>
               <button className="panelButton">

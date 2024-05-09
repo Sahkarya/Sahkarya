@@ -7,7 +7,41 @@ const cors = require("cors");
 const dataRoute = require("./routers/data-router");
 const dbRoute = require("./routers/db-router")
 const emailRoute = require("./routers/email-router")
+const mqtt = require('mqtt')
 const app = express();
+// Import required modules
+const http = require("http");
+const Server = require("socket.io")
+const server = http.createServer(app);
+const ioPORT = 4000;
+// const io = new Server(server);
+
+const io = Server(server, {
+  cors: {
+    origin: "*",
+  },} );
+// const socketPort = 8083;
+io.on("connection", (socket) => {
+  console.log("New client is connected");
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
+io.emit("message",'bye');
+try {
+  server.listen(ioPORT, ()=> {
+    console.log(`Connected successfully on port ${ioPORT}`);
+  });
+} catch (error) {
+  console.error(`Error occurred: ${error.message}`);
+}
+
+
+
+
+
+
 app.use(express.json());
 
 // Handling cors
@@ -17,11 +51,55 @@ const corsOptions = {
   credentials: true,
 };
 
+const protocol = 'mqtt'
+const host = 'broker.emqx.io'
+const port = '1883'
+const clientId = `esp32-client-`
+
+const connectUrl = `${protocol}://${host}:${port}`
+
+const client = mqtt.connect(connectUrl, {
+  clientId,
+  clean: true,
+  connectTimeout: 4000,
+  username: 'emqx',
+  password: 'public',
+  reconnectPeriod: 1000,
+})
+const topic = 'emqx/esp32'
+
+client.on('connect', () => {
+  console.log('Connected')
+  client.subscribe([topic], () => {
+    console.log(`Subscribe to topic '${topic}'`)
+  })
+})
+
+function isJsonString(str) {
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
+}
+
+client.on('message', (topic, payload) => {
+  console.log('Received Message:', topic, payload.toString())
+  
+  if (isJsonString(payload.toString())){
+    io.emit("message", payload.toString());
+
+  }
+})
+
+
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("The server is Working");
 });
+app.post
 
 app.use("/api/form", concernRoute);
 app.use("/api/auth", authRoute);
