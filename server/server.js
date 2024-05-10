@@ -66,13 +66,15 @@ const client = mqtt.connect(connectUrl, {
   password: 'public',
   reconnectPeriod: 1000,
 })
-const topic = 'emqx/esp32'
+const topic_fire = 'emqx/esp32'
+const topic_water = 'emqx/esp32/water'
 
 client.on('connect', () => {
   console.log('Connected')
-  client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`)
+  client.subscribe([topic_fire,topic_water], () => {
+    console.log(`Subscribe to topic '${topic_fire}' Subscribe to topic '${topic_water}'`)
   })
+
 })
 
 function isJsonString(str) {
@@ -84,14 +86,23 @@ function isJsonString(str) {
   return true;
 }
 
-client.on('message', (topic, payload) => {
-  console.log('Received Message:', topic, payload.toString())
+client.on('message', (topic_fire, payload) => {
+  console.log('Received Message:', topic_fire, payload.toString())
   
   if (isJsonString(payload.toString())){
-    io.emit("message", payload.toString());
+    io.emit("fire", payload.toString());
 
   }
 })
+client.on('message', (topic_water, payload) => {
+  console.log('Received Message:', topic_water, payload.toString())
+  
+  if (isJsonString(payload.toString())){
+    io.emit("water", payload.toString());
+
+  }
+})
+
 
 
 app.use(cors(corsOptions));

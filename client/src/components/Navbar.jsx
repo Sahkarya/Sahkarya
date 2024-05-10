@@ -11,7 +11,7 @@ const Navbar = () => {
     forceUpdate();
   }, [isLoggedIn]);
 
-  var WithoutNavbarRoute = ["/admin","/fire"];
+  var WithoutNavbarRoute = ["/admin","/fire","/pipe"];
   if(WithoutNavbarRoute.includes(window.location.pathname)){
     return null;
   }

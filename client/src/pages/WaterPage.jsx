@@ -2,17 +2,19 @@
 import { useState ,useEffect} from "react";
 import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
-import FireMap from "../components/Admin/FireMap";
-import FirePost from "../components/Admin/FirePost";
+import WaterMap from "../components/Admin/WaterMap";
+import WaterPost from "../components/Admin/WaterPost";
 import "./admin.css";
 // const WS_URL = "ws://127.0.0.1:8083";
 const socket = io("http://localhost:4000");
-const FirePage = ()=>{
+const WaterPage = ()=>{
   let navigator = useNavigate()
   const [MapCenter, setMapCenter] = useState([28.7041, 77.1025]);
   const [markerData,setMarkerData] = useState([]);
   const [address,setAddress] = useState("");
   const [date, setDate] = useState("")
+  const [flowRate, setFlowRate] = useState(0);
+  const [flowQuantity,setFlowQuantity] = useState(0);
   const [togglePost,setTogglePost] = useState(false);
   const MapProps = { MapCenter, setMapCenter };
   const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
@@ -36,7 +38,7 @@ const FirePage = ()=>{
     // setSearchText(display_name);
   }
   useEffect(() => {
-    socket.on("fire", (message) => {
+    socket.on("water", (message) => {
       console.log("received a new message from the server", message);
       let incomingData = JSON.parse(message)
       console.log([incomingData.Lat,incomingData.Long])
@@ -50,6 +52,8 @@ const FirePage = ()=>{
         setDate(date)
         
       }
+      setFlowQuantity(incomingData.LiquidQuantity);
+      setFlowRate(incomingData.FlowRate);
       
     });
     
@@ -89,7 +93,7 @@ const FirePage = ()=>{
                       src="./dustbinIcon.png"
                     ></img>
                   </button>
-                  <button className="panelButton" onClick={()=>navigator('/pipe')}>
+                  <button className="panelButton">
                     <img
                       className="iconTagList"
                       src="./pipelineIcon.png"
@@ -105,7 +109,7 @@ const FirePage = ()=>{
               </div>
             </div>
             <div className="rightContainer">
-              <div className="upperPanel" style={{background:'#ff9a00'}}>
+              <div className="upperPanel" style={{background:'#2389da'}}>
 
                 <div className="searchBar">
                   <h1 style={{fontFamily: "DM Sans",
@@ -113,7 +117,7 @@ const FirePage = ()=>{
 ,  fontWeight: '800',
   fontSize: '45px',
   lineHeight: '40px',
-  }}>Fire Report</h1>
+  }}>Pipeline Report</h1>
                
                 <div className="userIcon">
                   <a href="./profile" target="blank">
@@ -125,11 +129,11 @@ const FirePage = ()=>{
               </div>
     
               <div className="card-map">
-                {togglePost && 
-                <FirePost address= {address} date={date}/>}
+                {togglePost &&
+                <WaterPost address= {address} date={date} flow = {flowRate} quantity = {flowQuantity}/>}
                 <div className="mapContainer">
                   <div style={{ width: "100%", height: "100%" }}>
-                    <FireMap markerData={markerData} mapProps={MapProps} />
+                    <WaterMap markerData={markerData} mapProps={MapProps} />
                   </div>
                 </div>
               </div>
@@ -139,4 +143,4 @@ const FirePage = ()=>{
         )
 }
 
-export default FirePage;
+export default WaterPage;

@@ -23,11 +23,13 @@ import { Logout } from "./pages/Logout";
 import { adminLoader } from "./pages/Admin";
 import UserProfile from "./pages/UserProfile";
 import FirePage from "./pages/FirePage";
+import WaterPage from "./pages/WaterPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Home />} />
       <Route path="/fire" element={<FirePage />} />
+      <Route path="/pipe" element={<WaterPage />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/about" element={<About />} />
       <Route path="/concern" element={<Concern />} />
