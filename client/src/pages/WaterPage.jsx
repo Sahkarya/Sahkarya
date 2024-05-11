@@ -3,7 +3,10 @@ import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import WaterMap from "../components/Admin/WaterMap";
 import WaterPost from "../components/Admin/WaterPost";
+import { LineChart, Tooltip, XAxis, CartesianGrid, Line } from "recharts";
 import "./admin.css";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 // const WS_URL = "ws://127.0.0.1:8083";
 const socket = io("http://localhost:4000");
 const WaterPage = () => {
@@ -17,6 +20,34 @@ const WaterPage = () => {
   const [togglePost, setTogglePost] = useState(false);
   const MapProps = { MapCenter, setMapCenter };
   const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "fit-content",
+    height: "fit-content",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: "15px",
+  };
+
+  const [open, setOpen] = useState(false);
+  const [flowGraph, setFlow] = useState(0);
+
+  const [graphData, setGraphData] = useState([]);
+  const [currIndex, setCurrIndex] = useState(0);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleCordSearch = async (coords) => {
     const requestOptions = {
@@ -61,6 +92,14 @@ const WaterPage = () => {
       }
       setFlowQuantity(incomingData.LiquidQuantity);
       setFlowRate(incomingData.FlowRate);
+      let graphInstance = {
+        flow: incomingData.FlowRate,
+        time: currIndex,
+      };
+      setCurrIndex((currIndex) => (currIndex === 9 ? 0 : currIndex + 1));
+
+      console.log("instancre" + graphInstance);
+      setGraphData((graphData) => [...graphData, graphInstance]);
     });
   }, []);
   return (
@@ -131,6 +170,8 @@ const WaterPage = () => {
                 date={date}
                 flow={flowRate}
                 quantity={flowQuantity}
+                close={handleClose}
+                open={handleOpen}
               />
             )}
             <div className="mapContainer">
@@ -141,6 +182,17 @@ const WaterPage = () => {
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={handleClose}>
+        <Box sx={style}>
+          {console.log("graph data is : ", graphData)}
+          <LineChart width={800} height={600} data={graphData}>
+            <XAxis dataKey="time" />
+            <Tooltip />
+            <CartesianGrid stroke="#f5f5f5" />
+            <Line type="monotone" dataKey="flow" stroke="#8884d8" />
+          </LineChart>
+        </Box>
+      </Modal>
     </>
   );
 };
