@@ -120,7 +120,7 @@ const Admin = () => {
                   src="./fireButtonIcon.png"
                 ></img>
               </button>
-              <button className="panelButton">
+              <button className="panelButton" onClick={()=>navigator('/bin')}>
                 <img
                   className="iconTagList"
                   src="./dustbinIcon.png"

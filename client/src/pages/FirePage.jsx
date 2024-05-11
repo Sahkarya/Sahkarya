@@ -85,7 +85,7 @@ const FirePage = () => {
               >
                 <img className="iconTagList" src="./fireButtonIcon.png"></img>
               </button>
-              <button className="panelButton">
+              <button className="panelButton" onClick={() => navigator("/bin")}>
                 <img className="iconTagList" src="./dustbinIcon.png"></img>
               </button>
               <button
