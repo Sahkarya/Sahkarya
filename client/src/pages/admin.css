@@ -135,6 +135,17 @@
   background-color: #ffffff;
   border-radius: 10px;
 }
+
+.card2{
+  margin-left: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 490px;
+  height: 260px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
 .cardTag {
   position: absolute;
   width: fit-content;
