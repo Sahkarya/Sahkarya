@@ -6,7 +6,7 @@ And most importantly, the feature that differentiates our platform from a normal
 
 # Screenshots
 
-## Homapage
+## Homepage
 <img width="1436" alt="Screenshot 2024-03-30 at 6 08 56 PM" src="https://github.com/Sahkarya/Sahkarya/assets/90198169/da596ddb-c278-46d3-8490-5ec35c3babf9">
 
 ## Concern Form
